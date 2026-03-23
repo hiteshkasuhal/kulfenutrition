@@ -164,3 +164,16 @@
 .customize_quantity_item.product2_quantity .customize_item_flex {
     background: #fff;
 }
+
+@media (max-width:915px) {
+.customize_quantity_flex {
+    gap: 10px;
+}
+.customize_item_quantity input {
+    font-size: 15px;
+    line-height: 16px;
+}
+.customize_item_flex {
+    height: 36px;
+}
+}
