@@ -54,3 +54,17 @@
     line-height: 22px;
     text-underline-offset: 2px;
 }
+
+
+@media (max-width:915px) {
+.under_title_list ul li {
+    max-width: 146px;
+}
+.under_title_list ul {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    column-gap: 20px;
+}
+}
