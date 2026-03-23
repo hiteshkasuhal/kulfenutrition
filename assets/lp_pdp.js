@@ -12,6 +12,11 @@ $(document).on("click", ".question_product,.faq_question,.custom_icons_faq_main 
 
 
 
+$(document).on("click", "a[href='#customize']", function (e) {
+  e.preventDefault();
+    jQuery('.customize_quantity').slideToggle();
+});
+
 
 
  $(document).on("click", ".custom_button", function (e) {
