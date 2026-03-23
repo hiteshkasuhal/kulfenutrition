@@ -42,35 +42,25 @@
             "custom_class": "under_title_list"
           }
         },
+        "richtext_QgKmEt": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>🔥Buy 2 Get 1 Free – ends tonight 🔥</p>",
+            "custom_class": "bogo_title"
+          }
+        },
         "richtext_RGaEDG": {
           "type": "richtext",
+          "disabled": true,
           "settings": {
             "text": "<p>Clean  |  Delicious  |  Balanced  |  Fast-Acting</p>",
             "custom_class": "kulfe_pdt_text1 desktop_only"
           }
         },
-        "richtext_8R7QNh": {
-          "type": "richtext",
-          "settings": {
-            "text": "<p>Choose your flavor: <strong>Falooda</strong></p>",
-            "custom_class": "product_label_lp product_label_lp_switch"
-          }
-        },
-        "product_switch_E6MrzP": {
-          "type": "product_switch",
-          "settings": {
-            "label1": "Falooda",
-            "image1": "shopify://shop_images/kulfe_pdt1_flavor1.webp",
-            "image1_mob": "shopify://shop_images/kulfe_pdt1_flavor1mob.webp",
-            "label2": "Mango",
-            "image2": "shopify://shop_images/kulfe_pdt1_flavor2.webp",
-            "image2_mob": "shopify://shop_images/kulfe_pdt1_flavor2mob.webp"
-          }
-        },
         "richtext_pJNgyy": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Choose your quantity: <strong>1 Bottle</strong></p>",
+            "text": "<p>1. Choose your quantity: <strong>1 Bottle</strong></p>",
             "custom_class": "product_label_lp product_label_lp_variant"
           }
         },
@@ -94,8 +84,34 @@
             "badge3": "Save [save] + Free Shipping"
           }
         },
+        "richtext_8R7QNh": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>2. Choose your flavor: <strong>Falooda</strong></p>",
+            "custom_class": "product_label_lp product_label_lp_switch"
+          }
+        },
+        "product_switch_E6MrzP": {
+          "type": "product_switch",
+          "settings": {
+            "label1": "Falooda",
+            "image1": "shopify://shop_images/kulfe_pdt1_flavor1.webp",
+            "image1_mob": "shopify://shop_images/kulfe_pdt1_flavor1mob.webp",
+            "label2": "Mango",
+            "image2": "shopify://shop_images/kulfe_pdt1_flavor2.webp",
+            "image2_mob": "shopify://shop_images/kulfe_pdt1_flavor2mob.webp"
+          }
+        },
+        "richtext_pRATbA": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p><a href=\"#customize\" title=\"#customize\">I want to customize flavors</a></p>",
+            "custom_class": "customize_text"
+          }
+        },
         "richtext_qqWCEJ": {
           "type": "richtext",
+          "disabled": true,
           "settings": {
             "text": "<p>Subscribe and <strong>Save 15%</strong></p>",
             "custom_class": "kulfe_pdt_text2"
@@ -103,6 +119,7 @@
         },
         "subscription_rAatY9": {
           "type": "subscription",
+          "disabled": true,
           "settings": {
             "new_heading": "Save 25% with Automatic Refills!",
             "new_subheading": "Zero Commitment, Cancel Anytime",
@@ -120,6 +137,7 @@
         },
         "stock_GFzqtw": {
           "type": "stock",
+          "disabled": true,
           "settings": {
             "text": "Only 50 bottles left, offer ends soon!",
             "custom_class": ""
@@ -225,11 +243,13 @@
         "rating_custom_KJbmJC",
         "heading_riQnGK",
         "richtext_hXG7c4",
+        "richtext_QgKmEt",
         "richtext_RGaEDG",
-        "richtext_8R7QNh",
-        "product_switch_E6MrzP",
         "richtext_pJNgyy",
         "variants_fdXmTB",
+        "richtext_8R7QNh",
+        "product_switch_E6MrzP",
+        "richtext_pRATbA",
         "richtext_qqWCEJ",
         "subscription_rAatY9",
         "stock_GFzqtw",
