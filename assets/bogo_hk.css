@@ -150,3 +150,6 @@
 .customize_quantity {
     display: none;
 }
+.customize_text a.active {
+    display: none;
+}
