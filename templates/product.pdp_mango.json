@@ -69,7 +69,7 @@
         "product2_EaQEjq": {
           "type": "product2",
           "settings": {
-            "product": "{{ product }}"
+            "product": "mango-malai"
           }
         },
         "rating_custom_KJbmJC": {
