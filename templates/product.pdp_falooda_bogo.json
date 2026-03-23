@@ -142,6 +142,13 @@
             "custom_class": "customize_text"
           }
         },
+        "html_hnckCd": {
+          "type": "html",
+          "settings": {
+            "text": "",
+            "custom_class": ""
+          }
+        },
         "richtext_qqWCEJ": {
           "type": "richtext",
           "disabled": true,
@@ -283,6 +290,7 @@
         "richtext_8R7QNh",
         "product_switch_E6MrzP",
         "richtext_pRATbA",
+        "html_hnckCd",
         "richtext_qqWCEJ",
         "subscription_rAatY9",
         "stock_GFzqtw",
