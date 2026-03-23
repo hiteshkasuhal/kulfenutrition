@@ -3480,6 +3480,7 @@ $(this).parents('.options_flex').find('.option_item').removeClass('active');
 $(this).addClass('active');   
 
 var selected_variant_text = $('.option_item.active').eq(0).attr('variant_title');
+$('.product_label_lp p strong').text(selected_variant_text);
 
 var product_loop = $('.swicth_item.active').index();
 if(product_loop == 0){
