@@ -161,3 +161,6 @@
     cursor: no-drop;
     opacity: .5;
 }
+.customize_quantity_item.product2_quantity .customize_item_flex {
+    background: #fff;
+}
