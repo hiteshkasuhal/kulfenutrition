@@ -69,7 +69,7 @@
         "product2_EaQEjq": {
           "type": "product2",
           "settings": {
-            "product": "{{ product }}"
+            "product": "mango-malai-whey-protein-powder-bogo-deal"
           }
         },
         "rating_custom_KJbmJC": {
@@ -291,7 +291,7 @@
       ],
       "name": "Product LP",
       "settings": {
-        "product": "falooda-whey-isolate-protein-powder",
+        "product": "falooda-whey-protein-powder-bogo-deal",
         "custom_class": "kulfe_pdt_section",
         "custom_id": "",
         "bg_color": "",
