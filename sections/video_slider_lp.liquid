@@ -1,0 +1,291 @@
+
+{%- style -%}
+  
+{% if section.settings.bg != blank %}
+    .section_bg_{{ section.id }} {
+      background-image:url({{section.settings.bg | image_url}});
+    background-size: cover;
+    background-attachment: unset;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    } 
+  {% endif %}
+{% if section.settings.bg_mobile != blank %}
+  @media screen and (max-width: 750px) {
+    .section_bg_{{ section.id }} {
+      background-image:url({{section.settings.bg_mobile | image_url}});
+    }
+  }
+  {% endif %}
+  @media screen and (max-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if section.settings.svg_desktop != blank %}
+  <div class="desktop_only curve_top {{ section.settings.custom_class }}">{{ section.settings.svg_desktop }}</div>
+  {% endif %}
+  {% if section.settings.svg_mobile != blank %}
+  <div class="mobile_only curve_top {{ section.settings.custom_class }}">{{ section.settings.svg_mobile }}</div>
+  {% endif %}
+
+<div class="video_slider_custom section_bg_{{ section.id }} {{ section.settings.custom_class }}"{% if section.settings.custom_id != blank %} id="{{ section.settings.custom_id }}"{% endif %}
+style="background-color:{{ section.settings.bg_color | default:'transparent' }}">
+   <div class="container_hk section-{{ section.id }}-padding isolate">
+   
+
+       {% if section.settings.heading != blank %}
+<div class="videos_top_slider center">
+      <h2 class="rich-text__heading  inline-richtext h1">{{ section.settings.heading }}</h2>
+     </div>
+       {% if section.settings.subheading != blank %}
+      <div class="video_slider_subheading">{{ section.settings.subheading }}</div>
+       {% endif %}
+       {% endif %}
+
+     <div class="videos_center left">
+       <div class="videos_slider_main slider_{{ section.id }}">
+        {%- for block in section.blocks -%}
+              {%- if block.settings.video != blank -%}
+       <div class="videos_slider_item">
+         <div class="videos_slider_itemmain">
+          <div class="video_wrapper_custom">
+            {{ block.settings.video | media_tag: image_size: "master", autoplay: false, loop: true, controls: true, preload: "true", class:"video_paused_custom" }}
+            {% if  block.settings.image != blank %}
+           <img src="{{ block.settings.image | image_url }}" width="auto" height="auto" loading="lazy" alt="{{ block.settings.image.alt }}" class="trigger_video_play_js trigger_video_play_css">
+            {% else %}
+              <img src="{{ block.settings.video.preview_image | image_url }}" width="auto" height="auto" loading="lazy" alt="video" class="trigger_video_play_js trigger_video_play_css">
+           
+              {% endif %}
+             <div class="custom_button">
+                <span>
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+  <circle cx="21.7101" cy="22.1515" r="21.546" fill="white"/>
+  <path d="M29.2515 19.7465C30.6879 20.5758 30.6879 22.6491 29.2515 23.4784L18.7478 29.5427C17.3114 30.372 15.5159 29.3353 15.5159 27.6767L15.5159 15.5481C15.5159 13.8895 17.3114 12.8529 18.7478 13.6822L29.2515 19.7465Z" fill="#F1675B"/>
+</svg></span>
+                </div>
+                </div>
+          {% if block.settings.text != blank %}
+            <div class="video_text_slider_new">{{ block.settings.text }}</div>
+            {% endif %}
+          {% if block.settings.name != blank %}
+          <div class="review_name_video">
+          {% if block.settings.image2 != blank %}
+            <img src="{{ block.settings.image2 | image_url }}" width="auto" height="auto" fetchpriority="{{ block.settings.fetchpriority }}" loading="{{ block.settings.loading }}" alt="{{ block.settings.image2.alt }}">  
+           {% else %}
+            {{ block.settings.verified_img }}{% endif %}<span>{{ block.settings.name }}</span>
+          </div>
+            {% endif %}
+           </div>
+        </div>
+              {%- endif -%}
+       {% endfor %}
+       </div>
+     </div>
+        <div class="slider_navigations center{% if section.blocks.size < 6 %} mobile_only{% endif %}">
+  <div class="slider_button_custom prev_{{ section.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+  <circle cx="14" cy="14" r="13.75" stroke="white" stroke-width="0.5"/>
+  <path d="M10.4696 14.5303C10.1767 14.2374 10.1767 13.7626 10.4696 13.4697L15.2425 8.6967C15.5354 8.40381 16.0103 8.40381 16.3032 8.6967C16.5961 8.98959 16.5961 9.46447 16.3032 9.75736L12.0606 14L16.3032 18.2426C16.5961 18.5355 16.5961 19.0104 16.3032 19.3033C16.0103 19.5962 15.5354 19.5962 15.2425 19.3033L10.4696 14.5303ZM11 14V14.75H10.9999V14V13.25H11V14Z" fill="white"/>
+</svg></div>
+       <div class="slider_dots_custom dots_{{ section.id }}"></div>
+  <div class="slider_button_custom next_{{ section.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+  <circle cx="14" cy="14" r="13.75" stroke="white" stroke-width="0.5"/>
+  <path d="M18.5304 14.5303C18.8233 14.2374 18.8233 13.7626 18.5304 13.4697L13.7575 8.6967C13.4646 8.40381 12.9897 8.40381 12.6968 8.6967C12.4039 8.98959 12.4039 9.46447 12.6968 9.75736L16.9394 14L12.6968 18.2426C12.4039 18.5355 12.4039 19.0104 12.6968 19.3033C12.9897 19.5962 13.4646 19.5962 13.7575 19.3033L18.5304 14.5303ZM18 14V14.75H18.0001V14V13.25H18V14Z" fill="white"/>
+</svg></div>
+     </div>
+     
+   </div>
+  </div>
+
+<script>
+    $('.slider_{{ section.id }}').slick({
+  dots: true,
+  speed: 500,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: true,
+  cssEase:'linear',
+    prevArrow: $('.prev_{{ section.id }}'),
+    nextArrow: $('.next_{{ section.id }}'),
+    appendDots: $('.dots_{{ section.id }}'),
+  responsive: [
+    {
+      breakpoint: 915,
+      settings: {
+        slidesToShow:1, 
+         centerMode: true,
+         centerPadding: '0px',
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+  
+</script>
+
+    {% if section.settings.svg_desktop2 != blank %}
+  <div class="desktop_only curve_bottom {{ section.settings.custom_class }}">{{ section.settings.svg_desktop2 }}</div>
+  {% endif %}
+  {% if section.settings.svg_mobile2 != blank %}
+  <div class="mobile_only curve_bottom {{ section.settings.custom_class }}">{{ section.settings.svg_mobile2 }}</div>
+  {% endif %}
+
+{% schema %}
+  {
+    "name": "Video Slider",
+    "settings": [
+     {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom Class"
+    },
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "Custom ID"
+    },
+      {
+      "type": "image_picker",
+      "id": "bg",
+      "label": "Section Background"
+    },
+      {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Section Background"
+    },
+     {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color"
+    },
+     {
+      "type": "liquid",
+      "id": "svg_desktop",
+      "label": "Curve Top Desktop"
+    },
+     {
+      "type": "liquid",
+      "id": "svg_mobile",
+      "label": "Curve Top Mobile"
+    },
+     {
+      "type": "liquid",
+      "id": "svg_desktop2",
+      "label": "Curve Bottom Desktop"
+    },
+     {
+      "type": "liquid",
+      "id": "svg_mobile2",
+      "label": "Curve Bottom Mobile"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "SubHeading"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 50
+    }
+    ],
+  "blocks": [
+     {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+         {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Poster"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Reviewer Image"
+        },
+        {
+          "type": "liquid",
+          "id": "verified_img",
+          "label": "Verfied Svg"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "name",
+          "label": "Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+       "name": "Video Slider"
+    }
+  ]
+  }
+{% endschema %}

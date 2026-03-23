@@ -1,0 +1,737 @@
+<script src="{{ 'custom_header.js' | asset_url }}" async="async"></script>
+{{ 'custom_header.css' | asset_url | stylesheet_tag: preload: true }}
+{%- style -%}
+{% if section.settings.bg != blank %}
+    .section_bg_{{ section.id }} {
+      background-image:url({{section.settings.bg | image_url}});
+    background-size: cover;
+    background-attachment: unset;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    }
+  {% endif %}
+{% if section.settings.bg_mobile != blank %}
+  @media screen and (max-width: 915px) {
+    .section_bg_{{ section.id }} {
+      background-image:url({{section.settings.bg_mobile | image_url}});
+    }
+  }
+  {% endif %}
+  @media screen and (max-width: 915px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+  @media screen and (min-width: 915px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  {% if section.settings.bg2 != blank %}
+    .block_{{ section.id }} {
+      background-image:url({{section.settings.bg2 | image_url}});
+    background-size: cover;
+    background-attachment: unset;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    }
+  {% endif %}
+
+
+        
+{%- endstyle -%}
+
+
+<div class=" section_bg_{{ section.id }} custom_header_hk {{ section.settings.custom_class }}"{% if section.settings.custom_id != blank %} id="{{ section.settings.custom_id }}"{% endif %}
+style="background-color:{{ section.settings.bg_color | default:'transparent' }}">
+   <div class="container_hk section-{{ section.id }}-padding">
+     <div class="richtext_blocks_new {{ section.settings.position }} block_{{ section.id }}" style="background-color:{{ section.settings.bg_color2 | default:'transparent' }};color:{{ section.settings.color | default:'#000' }}">
+     <div class="header_flex">
+      <div class="drawer-button mobile_only" id="drawer-toggle">
+        {{ section.settings.svg }}
+      </div>
+      <div class="header_logo">
+{% if section.settings.logo != blank %}
+  <a href="{{ shop.url }}">
+  <img class="logo" alt="{{ section.settings.logo.alt }}" src="{{ section.settings.logo | image_url }}" loading="eager" width="auto" height="auto" fetchpriority="high" preload="true">
+  </a>
+  {% endif %}
+      </div>
+      
+{% if section.settings.menu != blank %}
+ <div class="header_menu_lp_desktop desktop_only">
+    {% for link in section.settings.menu.links %}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+      <div class="header_icons_lp">
+        <div class="header_form desktop_only">
+        {% form 'localization' %}
+  <select name="country_code" id="country_selector_header">
+    {% assign current_country = localization.country %}
+    <option value="{{ current_country.iso_code }}">
+      {{ current_country.currency.iso_code }} {{ current_country.currency.symbol }}
+    </option>
+
+    {% for country in localization.available_countries %}
+      {% unless country.iso_code == current_country.iso_code %}
+        <option value="{{ country.iso_code }}">
+          {{ country.currency.iso_code }} {{ country.currency.symbol }}
+        </option>
+      {% endunless %}
+    {% endfor %}
+  </select>
+{% endform %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const selector = document.getElementById("country_selector_header");
+    if (selector) {
+      selector.addEventListener("change", function () {
+        this.form.submit();
+      });
+    }
+  });
+</script>
+</div>
+{% if section.settings.account_icon != blank %}
+  <a class="account_icon_lp desktop_only" href="/account">{{ section.settings.account_icon }}</a>
+{%endif %}
+{% if section.settings.search_icon != blank %}
+  <a class="search_icon_lp desktop_only" href="/search">{{ section.settings.search_icon }}</a>
+{%endif %}
+
+      <div class="header_cart_toggle" id="cart-toggle">
+        <span class="cart_count_js"{% if cart.item_count == 0 %} style="display:none;"{% endif %}>{{ cart.item_count }}</span>
+        {{ section.settings.svg3 }}
+      </div>
+     </div>
+    </div>
+       
+     </div>
+   </div>
+  </div>
+
+<!-- Drawer Menu -->
+<div id="menu-drawer" class="drawer" style="background-color:{{ section.settings.bg_color | default:'transparent' }};color:{{ section.settings.color | default:'#000' }}">
+  <button id="drawer-close" class="drawer-close">{{ section.settings.svg2 }}</button>
+<div class="menu_drawer_top">
+   <div class="header_custom_search"><input type="text" name="search_custom" value="" placeholder="Search"><span class="search_trigger_button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+  <path d="M7.77291 2.25001C7.04225 2.24149 6.31717 2.37805 5.63966 2.65177C4.96216 2.92549 4.34571 3.33093 3.82602 3.84459C3.30633 4.35826 2.89373 4.96995 2.61214 5.64422C2.33054 6.31848 2.18555 7.04193 2.18555 7.77263C2.18555 8.50334 2.33054 9.22678 2.61214 9.90105C2.89373 10.5753 3.30633 11.187 3.82602 11.7007C4.34571 12.2143 4.96216 12.6198 5.63966 12.8935C6.31717 13.1672 7.04225 13.3038 7.77291 13.2953C9.22645 13.2783 10.6147 12.689 11.6366 11.6552C12.6585 10.6213 13.2315 9.22628 13.2315 7.77263C13.2315 6.31899 12.6585 4.92396 11.6366 3.8901C10.6147 2.85625 9.22645 2.26695 7.77291 2.25001Z" stroke="#1C1C1C" stroke-width="1.2" stroke-miterlimit="10"/>
+  <path d="M11.8926 11.8935L15.7498 15.7507" stroke="#1C1C1C" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round"/>
+</svg></span></div>
+  <ul class="drawer-menu">
+    {% for link in section.settings.menu.links %}
+    <li><a href="{{ link.url }}">{{ link.title }} <svg xmlns="http://www.w3.org/2000/svg" width="13" height="11" viewBox="0 0 13 11" fill="none">
+  <path d="M5.60994 0.693731C5.62984 0.717829 5.65327 0.740383 5.67881 0.760506C6.70137 1.54479 8.2607 1.822 10.42 1.60041L0.153904 10.0765C-0.0266294 10.2256 -0.0521245 10.4925 0.0969311 10.6731C0.245987 10.8536 0.512927 10.8791 0.69346 10.73L10.9596 2.25391C10.3334 4.3322 10.3099 5.91618 10.8865 7.06799C10.901 7.09722 10.9192 7.12416 10.9391 7.14826C11.0618 7.29693 11.2752 7.3474 11.4554 7.25701C11.6644 7.15244 11.7493 6.89757 11.6447 6.68855C11.514 6.42699 11.4251 6.12806 11.3734 5.79505C11.2524 5.01372 11.3482 4.03831 11.6637 2.87389C11.8112 2.32966 12.0059 1.7444 12.2485 1.11898C12.3601 0.816614 12.0957 0.496399 11.7777 0.548799C11.1176 0.668603 10.5065 0.749444 9.94383 0.79085C8.74076 0.880243 7.76515 0.790139 7.02012 0.523271C6.70326 0.40986 6.4262 0.265644 6.19413 0.0877098C6.00835 -0.0549427 5.74201 -0.019809 5.6001 0.166039C5.47872 0.326007 5.48719 0.545057 5.60994 0.693731Z" fill="black"/>
+</svg></a></li>
+      {% endfor %}
+  </ul>
+</div>
+<div class="menu_drawer_bottom">
+<a class="account_icon_mb_" href="/account"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+  <path d="M12.0939 4.5625C11.9559 6.421 10.5466 7.9375 9.00011 7.9375C7.45361 7.9375 6.04211 6.42175 5.90636 4.5625C5.76611 2.629 7.13636 1.1875 9.00011 1.1875C10.8631 1.1875 12.2349 2.66425 12.0939 4.5625Z" stroke="#1C1C1C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M2.2627 15.5602C2.8372 12.375 5.94145 10.6875 8.99995 10.6875C12.0584 10.6875 15.1627 12.375 15.7379 15.5602" stroke="#1C1C1C" stroke-width="1.2" stroke-miterlimit="10"/>
+</svg> Log in</a>
+
+       {% form 'localization' %}
+  <select name="country_code" id="country_selector_header2">
+    {% assign current_country = localization.country %}
+    <option value="{{ current_country.iso_code }}">
+      {{ current_country.currency.iso_code }} {{ current_country.currency.symbol }}
+    </option>
+
+    {% for country in localization.available_countries %}
+      {% unless country.iso_code == current_country.iso_code %}
+        <option value="{{ country.iso_code }}">
+          {{ country.currency.iso_code }} {{ country.currency.symbol }}
+        </option>
+      {% endunless %}
+    {% endfor %}
+  </select>
+{% endform %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const selector = document.getElementById("country_selector_header2");
+    if (selector) {
+      selector.addEventListener("change", function () {
+        this.form.submit();
+      });
+    }
+  });
+</script>
+</div>
+</div>
+
+<!-- Drawer Overlay -->
+<div class="custom_overlay" style="display:none;"></div>
+<div class="custom_overlay2" style="display:none;"></div>
+
+<!-- Cart Drawer -->
+<div id="cart-drawer" class="cart-drawer{% if cart.item_count == 0 %} is_empty{% endif %}" style="background-color:{{ section.settings.bg_color | default:'transparent' }};color:{{ section.settings.color | default:'#000' }}">
+  <button id="cart-close" class="cart-close">{{ section.settings.svg4 }}</button>
+  <div id="cart_drawer_content">
+  <div class="cart-content">
+    {% if cart.item_count == 0 %} 
+    <div class="cart_empty_content">
+    <div class="cart_empty_heading">{{ section.settings.cart_title1 }}</div>
+    <div class="cart_empty_button">{{ section.settings.empty_button }}</div>
+    </div>
+      {% endif %}
+  {% if cart.item_count > 0 %}
+    <div class="cart_content_fill"><div class="cart_top_sticky">
+    <div class="cart_heading">{{ section.settings.cart_title | replace:'[count]',cart.item_count }}</div>
+    {%if cart.total_price > 50 %}
+    <div class="cart_rating_top_new_free_shipping"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+  <g clip-path="url(#clip0_5769_1081)">
+    <path d="M7.23001 6.0475L7.30917 6.11667L14.3808 13.1875C14.4735 13.2801 14.5431 13.3932 14.5838 13.5177C14.6246 13.6422 14.6354 13.7746 14.6155 13.9041C14.5955 14.0336 14.5453 14.1565 14.4689 14.2629C14.3925 14.3694 14.2921 14.4563 14.1758 14.5167L14.0792 14.5583L5.42501 17.7475C3.79834 18.3475 2.21417 16.8183 2.70834 15.1942L2.75001 15.0725L5.93834 6.41834C5.98049 6.3037 6.04733 6.19973 6.13412 6.11378C6.22091 6.02784 6.32553 5.96203 6.44057 5.921C6.55562 5.87998 6.67828 5.86474 6.79987 5.87638C6.92145 5.88801 7.039 5.92624 7.14417 5.98834L7.23001 6.0475ZM14.7558 9.6675C15.515 9.7075 16.5558 9.8675 17.4608 10.4108C17.6443 10.5196 17.7791 10.6946 17.8374 10.8997C17.8958 11.1049 17.8732 11.3246 17.7744 11.5136C17.6756 11.7027 17.5081 11.8466 17.3064 11.9159C17.1047 11.9851 16.8841 11.9744 16.69 11.8858L16.6033 11.84C16.035 11.4983 15.3083 11.365 14.6683 11.3317C14.4046 11.3164 14.1402 11.3175 13.8767 11.335L13.6133 11.3608C13.396 11.3889 13.1763 11.3302 13.0019 11.1974C12.8275 11.0646 12.7124 10.8685 12.6816 10.6514C12.6508 10.4344 12.7068 10.214 12.8373 10.038C12.9679 9.86191 13.1626 9.74438 13.3792 9.71084C13.8356 9.65188 14.2966 9.63792 14.7558 9.6675ZM16.4433 7.345C16.6557 7.34545 16.8598 7.42693 17.0141 7.5728C17.1684 7.71868 17.2612 7.91794 17.2735 8.12991C17.2859 8.34188 17.2168 8.55057 17.0805 8.71336C16.9442 8.87615 16.7508 8.98076 16.54 9.00584L16.4433 9.01167H15.8533C15.641 9.01122 15.4369 8.92975 15.2826 8.78387C15.1283 8.638 15.0355 8.43873 15.0232 8.22676C15.0108 8.01479 15.0799 7.8061 15.2162 7.64331C15.3525 7.48052 15.5458 7.37591 15.7567 7.35084L15.8533 7.345H16.4433ZM13.7917 6.70584C13.9352 6.84933 14.0213 7.04025 14.0341 7.24277C14.0468 7.44529 13.9852 7.6455 13.8608 7.80584L13.7917 7.88417L12.9075 8.76834C12.7575 8.91779 12.5563 9.00456 12.3447 9.01103C12.1331 9.01749 11.9269 8.94316 11.7681 8.80313C11.6093 8.6631 11.5098 8.46788 11.4897 8.25711C11.4696 8.04634 11.5305 7.83583 11.66 7.66834L11.7292 7.59L12.6125 6.70667C12.6899 6.62919 12.7818 6.56772 12.883 6.52579C12.9841 6.48385 13.0926 6.46226 13.2021 6.46226C13.3116 6.46226 13.42 6.48385 13.5212 6.52579C13.6224 6.56772 13.7143 6.62836 13.7917 6.70584ZM11.6358 2.31834C12.0092 3.44 11.8092 4.66834 11.5758 5.52667C11.4356 6.06179 11.243 6.5818 11.0008 7.07917C10.9022 7.27698 10.7289 7.42748 10.5193 7.49757C10.4155 7.53228 10.3059 7.5462 10.1967 7.53854C10.0875 7.53088 9.98087 7.50178 9.88292 7.45292C9.68511 7.35424 9.53461 7.18102 9.46452 6.97137C9.42981 6.86756 9.41589 6.75793 9.42356 6.64874C9.43122 6.53956 9.46031 6.43295 9.50917 6.335C9.70751 5.93917 9.85084 5.51417 9.96751 5.08834C10.1567 4.395 10.2517 3.6425 10.1058 3.02584L10.055 2.84584C10.0187 2.74162 10.0034 2.63123 10.0101 2.52107C10.0168 2.4109 10.0453 2.30317 10.094 2.20412C10.1427 2.10507 10.2105 2.01667 10.2936 1.94405C10.3768 1.87144 10.4735 1.81606 10.5782 1.78113C10.6828 1.7462 10.7934 1.73241 10.9035 1.74056C11.0136 1.74871 11.1209 1.77865 11.2193 1.82862C11.3177 1.8786 11.4052 1.94763 11.4767 2.03169C11.5482 2.11576 11.6023 2.21319 11.6358 2.31834ZM16.1483 4.35C16.3046 4.50628 16.3923 4.7182 16.3923 4.93917C16.3923 5.16014 16.3046 5.37206 16.1483 5.52834L15.5592 6.1175C15.4823 6.1971 15.3903 6.26058 15.2887 6.30426C15.187 6.34793 15.0777 6.37092 14.967 6.37188C14.8564 6.37284 14.7466 6.35176 14.6442 6.30985C14.5418 6.26795 14.4488 6.20608 14.3705 6.12783C14.2923 6.04959 14.2304 5.95655 14.1885 5.85413C14.1466 5.75172 14.1255 5.64199 14.1265 5.53134C14.1274 5.42069 14.1504 5.31134 14.1941 5.20967C14.2378 5.108 14.3012 5.01604 14.3808 4.93917L14.97 4.35C15.1263 4.19378 15.3382 4.10601 15.5592 4.10601C15.7801 4.10601 15.9921 4.19378 16.1483 4.35Z" fill="#CED6FF"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_5769_1081">
+      <rect width="20" height="20" fill="white" transform="translate(0.5)"/>
+    </clipPath>
+  </defs>
+</svg><span>Congrats!, Free shipping is included!</span></div>
+    {% endif %}
+    <div class="cart_rating_top_new">{{ section.settings.rating_svg }}<span>{{ section.settings.rating_text }}</span></div>
+
+</div>
+    <div class="cart_free_bar">
+{% assign total_price_cart = cart.total_price %}
+{% assign threshold = section.settings.threshold | times:100 %}
+{% assign price_left = threshold | minus:cart.total_price | money %}
+{% if total_price_cart < threshold %}
+{% assign percentage_left = cart.total_price | times:100 | divided_by:threshold | round %}
+  {% endif %}
+{% if total_price_cart >= threshold %}
+{% assign percentage_left =  100 %}
+  {% endif %}
+            <div class="free_shipping_bar">
+            <div class="free_shipping_bar_inner">
+            <div class="free_shipping_bar_top">
+            <div class="free_shipping_unlocked trigger_unlock"{% if total_price_cart < threshold %} style="display:none;"{% endif %}>{{ section.settings.shipping_svg }}<span>{{ section.settings.shipping_unlocked }}</span></div>
+            <div class="free_shipping_locked trigger_lock"{% if total_price_cart >= threshold %} style="display:none;"{% endif %}>{{ section.settings.shipping_svg }}<span>{{ section.settings.shipping_locked | replace:'[price]',price_left }}</span></div>
+            </div>
+            <div class="free_shipping_bar_bttom">
+            <div class="free_shipping_bar_unfill"><div class="free_shipping_bar_fill" style="width:{{ percentage_left }}%;"><span>{% if percentage_left != 100 %}{{ percentage_left }}%{% else %}{{ section.settings.shipping_svg2 }}{% endif %}</span></div>
+            </div>
+            </div>
+            </div>
+            </div>
+      
+    </div>
+      <div class="cart_middle">
+      <div class="cart_items_main">
+        
+    {%- assign seen_variants = '' -%}
+   {% for item in cart.items %}
+    {%- comment -%} detect duplicates by variant id {%- endcomment -%}
+{%- assign needle   = ',' | append: item.variant.id | append: ',' -%}
+{%- assign haystack = ',' | append: seen_variants    | append: ',' -%}
+{%- assign is_duplicate = false -%}
+{%- if haystack contains needle -%}
+  {%- assign is_duplicate = true -%}
+{%- else -%}
+  {%- assign seen_variants = seen_variants | append: item.variant.id | append: ',' -%}
+{%- endif -%}
+      <div class="cart_item_single{% if is_duplicate %} is-duplicate{% else %} is-primary{% endif %}"{% if is_duplicate %} style="display:none;"{% endif %}
+     data-variant-id="{{ item.variant.id }}"
+     data-key="{{ item.key }}">
+      <div class="cart_item_single_flex">
+      <div class="cart_item_single_left">
+  {% if item.product.metafields.custom.cart_featured_image != blank %}
+  <img class="item_image" alt="{{ item.product.title }}" src="{{ item.product.metafields.custom.cart_featured_image | image_url }}" loading="eager" width="auto" height="auto" fetchpriority="high">
+ {% else %}
+  <img class="item_image" alt="{{ item.product.title }}" src="{{ item.product.featured_image | image_url }}" loading="eager" width="auto" height="auto" fetchpriority="high">
+  {%endif %}
+      </div>
+      <div class="cart_item_single_right">
+      <div class="cart_item_single_right_title_flex">
+      <div class="cart_item_single_right_title_left">
+      <div class="cart_item_single_title">{{ item.product.title }}</div> 
+          {% if item.options_with_values.size > 0 %}
+  <ul class="cart_item_options">
+    {% for option in item.options_with_values %}
+      <li>{{ option.name }}: {{ option.value }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+        
+      {% if item.selling_plan_allocation.selling_plan.id != blank %}
+     <div class="cart_item_single_selling_plan">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+    {% endif %}
+    
+  {%- assign variant_id = item.variant.id -%}
+  {%- assign total_final = 0 -%}
+  {%- assign total_original = 0 -%}
+{%- assign total_qty = 0 -%}
+ {%- for li in cart.items -%}
+    {%- if li.variant.id == variant_id -%}
+      {%- assign total_final = total_final | plus: li.final_line_price -%}
+      {% if li.variant.compare_at_price  > li.variant.price %}
+      {%- assign compare_orignal = li.variant.compare_at_price | times: li.quantity -%}
+      {%- assign total_original = total_original | plus: compare_orignal -%}
+      {% else %}
+      {%- assign total_original = total_original | plus: li.original_line_price -%}
+      {% endif %}
+    {%- assign total_qty = total_qty | plus: li.quantity -%}
+    {%- endif -%}
+  {%- endfor -%}
+      <div class="cart_item_single_right_bottom_right">
+        <div class="cart_quantity_wrapper">
+        <div class="cart_quantity_button quantity_minus">-</div>
+         <!-- real qty (readonly + hidden visually) -->
+      <input name="quantity_single"
+             type="number"
+             value="{{ item.quantity }}"
+             key="{{ item.key }}"
+             variant_id="{{ item.variant.id }}"
+             {% if item.selling_plan_allocation.selling_plan.id != blank %} 
+               selling_plan="{{ item.selling_plan_allocation.selling_plan.id }}"
+             {% endif %}
+             readonly style="display:none;">
+      
+      <!-- fake qty (sum of paid + free) -->
+<input class="fake_quantity_display"
+       type="number"
+       value="{{ total_qty }}"
+       readonly>
+
+
+
+        <div class="cart_quantity_button quantity_plus">+</div>
+        </div>
+        
+      <div class="stock_cart"><span class="stock_outer"><span class="stock_inner"></span></span>In stock</div>
+      </div>
+      </div>
+      <div class="cart_item_single_right_title_right">
+      <div class="cart_item_single_right_title_right_price"> 
+          <div class="cart_item_single_price">{{ total_final | money }}</div>
+  {%- if total_original > total_final -%}
+    <div class="cart_item_single_price_compare">{{ total_original | money }}</div>
+    <div class="cart_item_single_price_save">Save {{ total_original | minus:total_final | money_without_trailing_zeros }}</div>
+  {%- endif -%}
+      </div>
+      <div class="cart_item_single_right_remove remove-variant-{{ item.variant.id }}" line="{{ forloop.index }}"
+       key="{{ item.key }}"
+       variant_id="{{ item.variant.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <path d="M4 6.33594H5.33333H16" stroke="black" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.6673 6.33073V15.6641C14.6673 16.0177 14.5268 16.3568 14.2768 16.6069C14.0268 16.8569 13.6876 16.9974 13.334 16.9974H6.66732C6.3137 16.9974 5.97456 16.8569 5.72451 16.6069C5.47446 16.3568 5.33398 16.0177 5.33398 15.6641V6.33073M7.33399 6.33073V4.9974C7.33399 4.64377 7.47446 4.30464 7.72451 4.05459C7.97456 3.80454 8.3137 3.66406 8.66732 3.66406H11.334C11.6876 3.66406 12.0267 3.80454 12.2768 4.05459C12.5268 4.30464 12.6673 4.64377 12.6673 4.9974V6.33073" stroke="black" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+          {% endfor %}
+      </div>
+        {% if section.settings.recommended_product != blank %}
+          {% assign recommended_product = section.settings.recommended_product  %}
+          <div class="recommended_product_main">
+        {% if section.settings.recommended_title != blank %}
+          <div class="recommended_product_title">{{ section.settings.recommended_title }}</div>
+          <div class="recommended_product_main_items slider_{{ section.id }} custom_slick_slider same_height_slider">
+            {% for recommended_product in section.settings.recommended_product %}
+      <div class="recommended_product_item">
+      <div class="recommended_product_flex">
+      <div class="recommended_product_left">
+  <img class="item_image" alt="{{ recommended_product.title }}" src="{{ recommended_product.featured_image | image_url }}" loading="eager" width="auto" height="auto" fetchpriority="high">
+      </div>
+      <div class="recommended_product_right">
+      <div class="recommended_product_title_flex">
+      <div class="recommended_product_title_left">
+      <div class="recommended_product_single_rating"><svg xmlns="http://www.w3.org/2000/svg" width="72" height="12" viewBox="0 0 72 12" fill="none">
+  <path d="M6 0L7.35073 4.14088L11.7063 4.1459L8.18553 6.71012L9.52671 10.8541L6 8.298L2.47329 10.8541L3.81447 6.71012L0.293661 4.1459L4.64927 4.14088L6 0Z" fill="#1A2D95"/>
+  <path d="M21 0L22.3507 4.14088L26.7063 4.1459L23.1855 6.71012L24.5267 10.8541L21 8.298L17.4733 10.8541L18.8145 6.71012L15.2937 4.1459L19.6493 4.14088L21 0Z" fill="#1A2D95"/>
+  <path d="M36 0L37.3507 4.14088L41.7063 4.1459L38.1855 6.71012L39.5267 10.8541L36 8.298L32.4733 10.8541L33.8145 6.71012L30.2937 4.1459L34.6493 4.14088L36 0Z" fill="#1A2D95"/>
+  <path d="M51 0L52.3507 4.14088L56.7063 4.1459L53.1855 6.71012L54.5267 10.8541L51 8.298L47.4733 10.8541L48.8145 6.71012L45.2937 4.1459L49.6493 4.14088L51 0Z" fill="#1A2D95"/>
+  <path d="M66 0L67.3507 4.14088L71.7063 4.1459L68.1855 6.71012L69.5267 10.8541L66 8.298L62.4733 10.8541L63.8145 6.71012L60.2937 4.1459L64.6493 4.14088L66 0Z" fill="#1A2D95"/>
+</svg><span>4.8 / 5.0</span></div> 
+      <div class="recommended_product_single_title">{{ recommended_product.title }}</div> 
+        </div>
+      <div class="recommended_product_right_title_right">
+        {% if recommended_product.compare_at_price > recommended_product.price %}
+          <div class="recommended_product_save">Save {{ recommended_product.compare_at_price | minus: recommended_product.price | money_without_trailing_zeros }}</div>
+          {% endif %}
+          <div class="recommended_product_price_flex">
+        {% if recommended_product.compare_at_price > recommended_product.price %}
+      <div class="recommended_product_price_compare">{{ recommended_product.compare_at_price  | money }}</div>
+          {% endif %}
+      <div class="recommended_product_price">{{ recommended_product.price | money }}</div>
+          </div>
+      </div>
+      </div>
+      <div class="recommended_product_bottom_flex">
+      <div class="recommended_product_bottom_left">
+      
+      </div>
+      <div class="recommended_product_right_bottom_right">
+        <div class="recommended_product_atc">
+        <div class="recommended_product_button" variant_id="{{ recommended_product.variants[1].id }}" quantity="1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M4 1.33203L2 3.9987V13.332C2 13.6857 2.14048 14.0248 2.39052 14.2748C2.64057 14.5249 2.97971 14.6654 3.33333 14.6654H12.6667C13.0203 14.6654 13.3594 14.5249 13.6095 14.2748C13.8595 14.0248 14 13.6857 14 13.332V3.9987L12 1.33203H4Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M2 4H14" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10.6685 6.66797C10.6685 7.37521 10.3876 8.05349 9.88749 8.55359C9.38739 9.05368 8.70912 9.33464 8.00187 9.33464C7.29463 9.33464 6.61635 9.05368 6.11625 8.55359C5.61616 8.05349 5.33521 7.37521 5.33521 6.66797" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+{%endfor %}
+
+      </div>
+           <div class="slider_navigations center">
+  <div class="slider_button_custom custom_prev prev_{{ section.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M10 3.5L5 8.5L10 13.5" stroke="#1A2D95" stroke-opacity="1" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+       <div class="slider_dots_custom dots_{{ section.id }}"></div>
+  <div class="slider_button_custom custom_next next_{{ section.id }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M6 12.5L10 8.5L6 4.5" stroke="#1A2D95" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div> 
+     </div>
+     <script>
+    $('.slider_{{ section.id }}').slick({
+  dots: true,
+  speed: 300,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: false,
+  infinite: true,
+    prevArrow: $('.prev_{{ section.id }}'),
+    nextArrow: $('.next_{{ section.id }}'),
+    appendDots: $('.dots_{{ section.id }}'),
+  cssEase:'linear',
+  responsive: [
+    {
+      breakpoint: 915,
+      settings: {
+        speed: 300,
+        slidesToShow:1,
+      }
+    }
+  ]
+});
+  
+</script>
+          {% endif %}
+          </div>
+          {% endif %}
+      </div>
+
+      
+  {%- assign total_original = 0 -%}
+ {%- for li in cart.items -%}
+      {%- assign total_final = total_final | plus: li.final_line_price -%}
+      {% if li.variant.compare_at_price  > li.variant.price %}
+      {%- assign compare_orignal = li.variant.compare_at_price | times: li.quantity -%}
+      {%- assign total_original = total_original | plus: compare_orignal -%}
+      {% else %}
+      {%- assign total_original = total_original | plus: li.original_line_price -%}
+      {% endif %}
+  {%- endfor -%}
+
+
+    <div class="cart_footer">
+    <div class="cart_footer_top">
+    <div class="cart_footer_subtotal_title">{{ section.settings.subtotal }} {{ cart.item_count }} {% if cart.item_count > 1 %}Items{%else %} Item{%endif %}</div>
+    <div class="cart_footer_subtotal_right">
+      {% if total_original  > cart.total_price %}
+    <div class="cart_footer_subtotal_save">Save {{ total_original | minus:cart.total_price | money }}</div>
+      {% endif %}
+    <div class="cart_footer_subtotal_price">{% if total_original > cart.total_price %}<s>{{ total_original | money }}</s> {% endif %}{{ cart.total_price | money }} </div>
+    </div>
+    </div>
+
+
+    <div class="cart_footer_button">
+      <a href="/checkout" class="checkout_button"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="18" viewBox="0 0 12 18" fill="none">
+  <path d="M1.125 17.5C0.815625 17.5 0.550811 17.3811 0.330563 17.1432C0.110186 16.9055 0 16.6196 0 16.2857V7.50238C0 7.16845 0.110186 6.88257 0.330563 6.64469C0.550811 6.40697 0.815625 6.28809 1.125 6.28809H2.4375V4.34524C2.4375 3.28139 2.78505 2.37459 3.48019 1.62483C4.17518 0.874943 5.01581 0.5 6.00206 0.5C6.9882 0.5 7.82812 0.874943 8.52188 1.62483C9.21562 2.37459 9.5625 3.28139 9.5625 4.34524V6.28809H10.875C11.1844 6.28809 11.4492 6.40697 11.6696 6.64469C11.8899 6.88257 12 7.16845 12 7.50238V16.2857C12 16.6196 11.8899 16.9055 11.6696 17.1432C11.4492 17.3811 11.1844 17.5 10.875 17.5H1.125ZM6.00319 13.4524C6.40106 13.4524 6.74063 13.3038 7.02188 13.0065C7.30313 12.7093 7.44375 12.352 7.44375 11.9345C7.44375 11.5298 7.30207 11.1621 7.01869 10.8315C6.7353 10.501 6.39469 10.3357 5.99681 10.3357C5.59894 10.3357 5.25937 10.501 4.97812 10.8315C4.69687 11.1621 4.55625 11.5331 4.55625 11.9446C4.55625 12.3562 4.69793 12.7103 4.98131 13.0071C5.2647 13.304 5.60531 13.4524 6.00319 13.4524ZM3.5625 6.28809H8.4375V4.34524C8.4375 3.61437 8.20076 2.9932 7.72725 2.48171C7.25374 1.9701 6.67875 1.71429 6.00225 1.71429C5.32575 1.71429 4.75001 1.9701 4.275 2.48171C3.79999 2.9932 3.5625 3.61437 3.5625 4.34524V6.28809Z" fill="white"/>
+</svg> {{ section.settings.checkout }}</a>
+    </div>
+    
+    <div class="under_cta_texts">
+    <div class="under_cta_text">{{ section.settings.under_svg1 }}
+      <span>{{ section.settings.under_text1 }}</span>
+    </div>
+    <div class="under_cta_text">{{ section.settings.under_svg2 }}
+      <span>{{ section.settings.under_text2 }}</span>
+    </div>
+    </div>
+{% if section.settings.payments != blank %}
+  <div class="cart_paymants">
+  <img class="payments_icons" alt="{{ section.settings.payments.alt }}" src="{{ section.settings.payments | image_url }}" loading="eager" width="auto" height="auto" fetchpriority="high">
+  </div>
+  {% endif %}
+    </div>
+  </div>
+    {% endif %}
+  </div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Custom header",
+    "settings": [
+       {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom Class"
+    },
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "Custom ID"
+    },
+    {
+      "type": "liquid",
+      "id": "svg",
+      "label": "Menu Svg"
+    },
+    {
+      "type": "liquid",
+      "id": "svg2",
+      "label": "Menu Svg Close"
+    },
+    {
+      "type": "liquid",
+      "id": "svg3",
+      "label": "Cart Svg"
+    },
+    {
+      "type": "liquid",
+      "id": "svg4",
+      "label": "Cart Svg Close"
+    },
+    {
+      "type": "liquid",
+      "id": "account_icon",
+      "label": "Account Icon"
+    },
+    {
+      "type": "liquid",
+      "id": "search_icon",
+      "label": "Search Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_title",
+      "label": "Cart Title",
+      "default":"Your Cart ([count])"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_title1",
+      "label": "Cart Empty Title",
+      "default":"Your Cart Is Empty"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "empty_button",
+      "label": "Cart Empty Button",
+      "default":"Continue Shopping"
+    },
+    {
+      "type": "liquid",
+      "id": "rating_svg",
+      "label": "Cart Rating Svg"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "rating_text",
+      "label": "Cart Text"
+    },
+    {
+      "type": "number",
+      "id": "threshold",
+      "label": "Free Shipping Threshold",
+      "default":200
+    },
+    {
+      "type": "liquid",
+      "id": "shipping_svg",
+      "label": "Free Shipping Svg"
+    },
+    {
+      "type": "liquid",
+      "id": "shipping_svg2",
+      "label": "Free Shipping Achieve Svg"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "shipping_unlocked",
+      "label": "Free Shipping Unlocked",
+      "default":"<strong>Congrats!</strong> You have unlocked <strong>FREE Shipping!</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "shipping_locked",
+      "label": "Free Shipping Locked",
+      "default":"Add <strong>[price]</strong> to unlock <strong>FREE Shipping!</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "recommended_title",
+      "label": "Recommended Title",
+      "default":"You may like "
+    },
+    {
+      "type": "product_list",
+      "id": "recommended_product",
+      "label": "Recommended Products"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtotal",
+      "label": "Subtotal Title",
+      "default":"Subtotal: "
+    },
+    {
+      "type": "inline_richtext",
+      "id": "checkout",
+      "label": "Checkout Title",
+      "default":"secure checkout"
+    },
+    {
+      "type": "liquid",
+      "id": "under_svg1",
+      "label": "Svg1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "under_text1",
+      "label": "Text1"
+    },
+    {
+      "type": "liquid",
+      "id": "under_svg2",
+      "label": "Svg2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "under_text2",
+      "label": "Text2"
+    },
+    {
+      "type": "image_picker",
+      "id": "payments",
+      "label": "payments"
+    },
+      {
+      "type": "image_picker",
+      "id": "bg",
+      "label": "Section Background"
+    },
+      {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Section Background"
+    },
+     {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color"
+    },
+      {
+      "type": "image_picker",
+      "id": "bg2",
+      "label": "Section Block Background"
+    },
+     {
+      "type": "color",
+      "id": "bg_color2",
+      "label": "Section Block Background Color"
+    },
+     {
+      "type": "color",
+      "id": "color",
+      "label": "Section Block Text Color"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Content position"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 50
+    }
+    ],
+  "presets": [
+    {
+      "name": "Custom header"
+    }
+  ]
+  }
+{% endschema %}

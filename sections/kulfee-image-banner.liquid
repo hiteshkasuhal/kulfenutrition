@@ -1,0 +1,90 @@
+<style>
+.hero_outer .custom_container { position: absolute;inset: 0; gap: 30px;}
+.hero_bg img { width: 100%;}
+.left_col { width: 50%;}
+.right_col { width: 50%;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="hero_outer">
+  <div class="hero_bg"><img src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/hero-bg.png?v=1761635087"></div>
+  <div class="custom_container">
+    <div class="left_col"> <img src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/hero-product.png?v=1761635085"> </div>
+    <div class="right_col">
+      <div class="happy-customers">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/user-dummy.png?v=1761635250"
+          alt="customers"
+          width="88"
+        >
+        Thousands of happy customers
+      </div>
+      <h1>Power your day, the Falooda Way.</h1>
+      <p>High-protein, low-sugar, and zero bloat for those who want results without compromise.</p>
+
+      <div class="features">
+        <div class="feature-item">
+          <span class="tick"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/pink-tick.svg?v=1761635380"
+          ></span>
+          Premium Protein
+        </div>
+        <div class="feature-item">
+          <span class="tick"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/pink-tick.svg?v=1761635380"
+          ></span>
+          Gut-Friendly
+        </div>
+        <div class="feature-item">
+          <span class="tick"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/pink-tick.svg?v=1761635380"
+          ></span>
+          Authentic Flavor
+        </div>
+        <div class="feature-item">
+          <span class="tick"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0916/7447/6837/files/pink-tick.svg?v=1761635380"
+          ></span>
+          Lab Tested
+        </div>
+      </div>
+      <div class="getnow_btn">
+        <a href="#" class="custom_cta">Get Yours Now</a>
+      </div>
+      <div class="guarantee">30-day money back guarantee</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Banner"
+    }
+  ]
+}
+{% endschema %}
