@@ -1,0 +1,56 @@
+.section_faq_2 .kulfe_scoop_faq {
+    background: transparent;
+}
+button#Subscribe {
+    background: #E6A206;
+    border-color: #E6A206;
+}
+.field_lp input {
+    border-color: #E6A206;
+}
+.kulfe_footer_media ul svg path:nth-child(1) {
+    fill: #E6A206;
+}
+body a.jdgm-write-rev-link {
+    border-color: #E6A206 !important;
+    background: #E6A206 !important;
+}
+.jdgm-rev-widg .jdgm-star, .jdgm-revs-tab .jdgm-star, .jdgm-all-reviews .jdgm-star, .jdgm-gallery-popup .jdgm-star, .jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown, .jdgm-sort-dropdown-wrapper .jdgm-sort-dropdown-arrow {
+    color: #E6A206 !important;
+}
+.kulfe_table_item2 {
+    background: #E6A206;
+}
+.kulfe_scoop_faq {
+    background: #FFF8E8;
+}
+.kulfe_scoop_faq path {
+    fill: #E6A206;
+}
+.kulfe_number2_list1 .icons_with_text_flex .icons_with_text_item .icons_with_text_item_flex .icons_with_text_item_svg {
+    color: #E6A206;
+}
+.kulfe_losing_list1 .icons_with_text_flex .icons_with_text_item {
+    background: #FFF8E8;
+}
+.kulfe_number1_list1 .icons_with_text_flex .icons_with_text_item .icon_svg_main {
+    color: #FAC447;
+}
+.kulfe_review_section .review_slider_custom_slider_new_item_bg.left {
+    background: #FFF8E8;
+}
+.kulfe_review_section .review_rating2 svg path {
+    fill: #E6A206;
+}
+.kulfe_review_section .review_name strong {
+    color: #CA8E05;
+}
+.kulfe_review_section .reviews_top_slider.center {
+    align-items: center;
+}
+.kulfe_review_section .reviews_top_slider.center svg path {
+    fill: #E6A206;
+}
+.kulfe_review_section .review_name strong:before {
+    background-image: url(https://cdn.shopify.com/s/files/1/0916/7447/6837/files/verified.webp);
+}

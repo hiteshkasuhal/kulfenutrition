@@ -1,0 +1,7 @@
+
+.custom_landingpage aside#shopify-section-sections--25133398524197__announcement-bar,
+.custom_landingpage footer#shopify-section-sections--25133398458661__footer,
+.custom_landingpage header {display: none;}
+body.custom_landingpage {background: transparent;}
+.custom_container{width:100%;max-width:1388px; padding:0 30px; margin:0 auto;display: flex; align-items: center;}
+section.hero_outer {width: 100%;position: relative;}
