@@ -1028,7 +1028,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      {% if forloop.index == 3 %}
 {% assign quantity = 3 %}
 {% if block.settings.title3 != blank %}
-  <div class="variant_title" title="{{ block.settings.title3 | stip_html | replace:'Buy 2 Get 1 Free!','3 Bottles' }}">{{block.settings.title3 }}</div>
+  <div class="variant_title" title="3 Bottles">{{block.settings.title3 }}</div>
   {% else %}
   <div class="variant_title">{{ variant.title }}</div>
   {% endif %}
