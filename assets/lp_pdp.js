@@ -14,6 +14,7 @@ $(document).on("click", ".question_product,.faq_question,.custom_icons_faq_main 
 
 $(document).on("click", "a[href='#customize']", function (e) {
   e.preventDefault();
+  $(this).toggleClass('active');
     jQuery('.customize_quantity').slideToggle();
 });
 
