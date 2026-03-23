@@ -157,3 +157,7 @@
 .customize_text a.active {
     display: none;
 }
+.customize_item_button[disabled] {
+    cursor: no-drop;
+    opacity: .5;
+}
