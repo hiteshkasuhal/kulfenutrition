@@ -69,7 +69,7 @@
         "product2_EaQEjq": {
           "type": "product2",
           "settings": {
-            "product": "mango-malai"
+            "product": "{{ product }}"
           }
         },
         "rating_custom_KJbmJC": {
@@ -291,7 +291,7 @@
       ],
       "name": "Product LP",
       "settings": {
-        "product": "{{ product }}",
+        "product": "falooda-whey-isolate-protein-powder",
         "custom_class": "kulfe_pdt_section",
         "custom_id": "",
         "bg_color": "",
