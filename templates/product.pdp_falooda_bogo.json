@@ -30,9 +30,16 @@
         "heading_riQnGK": {
           "type": "heading",
           "settings": {
-            "text": "Experience premium nutrition",
+            "text": "Falooda whey protein powder",
             "heading_size": "h1",
             "custom_class": "kulfe_pdt_heading desktop_only"
+          }
+        },
+        "richtext_hXG7c4": {
+          "type": "richtext",
+          "settings": {
+            "text": "<ul><li>🍀Metabolic Balance</li><li>🔋Steady Energy</li><li>🚀 Strength & Recovery</li><li>🌟️Smooth Digestion</li></ul>",
+            "custom_class": "under_title_list"
           }
         },
         "richtext_RGaEDG": {
@@ -217,6 +224,7 @@
         "product2_EaQEjq",
         "rating_custom_KJbmJC",
         "heading_riQnGK",
+        "richtext_hXG7c4",
         "richtext_RGaEDG",
         "richtext_8R7QNh",
         "product_switch_E6MrzP",
