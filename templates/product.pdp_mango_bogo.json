@@ -116,7 +116,7 @@
         "richtext_pJNgyy": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Choose your quantity: <strong>2 Bottles</strong></p>",
+            "text": "<p>Choose your quantity: <strong>1 Bottle</strong></p>",
             "custom_class": "product_label_lp product_label_lp_variant"
           }
         },
