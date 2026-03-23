@@ -10,6 +10,39 @@
 {
   "layout": "theme.lp_pdp",
   "sections": {
+    "richtext_lpnew_iJVApw": {
+      "type": "richtext_lpnew",
+      "blocks": {
+        "html_9dURa4": {
+          "type": "html",
+          "settings": {
+            "text": "{{ 'bogo_hk.css' | asset_url | stylesheet_tag: preload: true }}",
+            "custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "html_9dURa4"
+      ],
+      "name": "Richtext Lpnew",
+      "settings": {
+        "custom_class": "",
+        "custom_id": "",
+        "svg_desktop": "",
+        "svg_mobile": "",
+        "svg_desktop2": "",
+        "svg_mobile2": "",
+        "bg_color": "",
+        "bg_color2": "",
+        "color": "",
+        "position": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "trigger_class": ""
+      }
+    },
     "product_lp_eL6de3": {
       "type": "product_lp",
       "blocks": {
@@ -1393,6 +1426,7 @@
     }
   },
   "order": [
+    "richtext_lpnew_iJVApw",
     "product_lp_eL6de3",
     "two_layer_richtext_lpnew_cj9G9x",
     "review_slider_lpnew_bW86xy",

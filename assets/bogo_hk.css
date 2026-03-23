@@ -1,0 +1,56 @@
+.under_title_list ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    width: fit-content;
+    list-style: none;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    row-gap: 10px;
+    padding-bottom: 35px;
+    padding-top: 12px;
+}
+.under_title_list ul li svg {
+    display: none;
+}
+.under_title_list ul li {
+    display: flex;
+    align-items: center;
+    max-width: 36%;
+    width: 100%;
+}
+.product_label_lp_variant {
+    padding-top: 35px;
+}
+.bogo_title {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #C86686;
+    color: #fff;
+}
+.product_label_lp_switch {
+    padding-top: 35px;
+}
+.product_swictcher .product_swictcher_flex {
+    padding-bottom: 20px;
+}
+.custom_checkout_button_landing_page {
+    padding-top: 35px;
+}
+.customize_text a {
+    opacity: .7;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    text-underline-offset: 2px;
+}
