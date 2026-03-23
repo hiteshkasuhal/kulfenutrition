@@ -3489,6 +3489,11 @@ var variant_id = $(this).attr('variant_id');
 if(product_loop == 1){
 var variant_id = $(this).attr('variant_id2');
 }
+var quantity = $('.option_item.active').index();
+quantity = quantity + 1;
+$('.product1_quantity input').val(quantity);
+$('.product2_quantity input').val('0');
+
 $('span.custom_checkout_button').attr('variant_id',variant_id);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
