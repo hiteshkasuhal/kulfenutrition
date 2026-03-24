@@ -3897,6 +3897,11 @@ function updateVariants(){
     .attr('variant_id2', variant2 ? variant2.variant_id : '')
     .attr('selling_plan', variant1 ? variant1.selling_plan : '')
     .attr('selling_plan2', variant2 ? variant2.selling_plan : '');
+var selected_tab = $('.subscription_item.active').attr('data_tab');
+if (selected_tab == '1'){
+$('.trigger_{{ section.id }}').removeAttr('selling_plan');
+$('.trigger_{{ section.id }}').removeAttr('selling_plan2');
+}
 }
 function updateButtons(){
 
@@ -3943,12 +3948,15 @@ var index_price = totalqty -1;
     }
 
     /* PRICE SWITCH */
-
-    $('.product_switch.active .price_trigger')
+  $('.product_switch.active .price_trigger')
       .hide()
       .removeClass('active');
-
-    $('.product_switch.active .price_trigger').eq(index_price).show().addClass('active');
+      $('.product_switch.active').each(function(){
+    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
+});
+      $('.product_switch.active .subscription_trigger').each(function(){
+    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
+});
   }
 
   updateVariants();
