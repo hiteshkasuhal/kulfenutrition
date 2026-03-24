@@ -1753,7 +1753,9 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     {% when 'product_switch' %}
           <div class="product_swictcher">
                  <div class="product_swictcher_flex">
-<div class="swicth_item active" data_tab="{{ product.id }}"><span>{{ block.settings.label1 }}
+<div class="swicth_item active" data_tab="{{ product.id }}">
+  {% if product.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
+  <span>{{ block.settings.label1 }}
 </span>
 {% if block.settings.image1 != blank %} 
 <img src="{{ block.settings.image1 | image_url }}" width="auto" height="auto" loading="eager" fetchpriority="high" alt="{{ block.settings.image1.alt }}"{% if block.settings.image1_mob != blank %} class="desktop_only"{%endif %}>
@@ -1762,7 +1764,9 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 <img src="{{ block.settings.image1_mob | image_url }}" width="auto" height="auto" loading="eager" fetchpriority="high" alt="{{ block.settings.image1_mob.alt }}" class="mobile_only">
 {% endif %}
 </div>
-<div class="swicth_item" data_href="{{ product2.url }}" data_tab="{{ product2.id }}"><span>{{ block.settings.label2 }}</span>
+<div class="swicth_item" data_href="{{ product2.url }}" data_tab="{{ product2.id }}">
+  {% if product2.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
+  <span>{{ block.settings.label2 }}</span>
 {% if block.settings.image2 != blank %}
 <img src="{{ block.settings.image2 | image_url }}" width="auto" height="auto" loading="eager" fetchpriority="high" alt="{{ block.settings.image2.alt }}"{% if block.settings.image2_mob != blank %} class="desktop_only"{%endif %}>
 {% endif %}
