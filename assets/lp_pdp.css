@@ -2958,4 +2958,9 @@ body {
 .customize_item_flex {
     height: 36px;
 }
+
+
+.product_swictcher .product_swictcher_flex {
+    padding-bottom: 15px;
+}
 }
