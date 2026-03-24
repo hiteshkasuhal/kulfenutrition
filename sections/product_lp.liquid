@@ -3788,7 +3788,8 @@ function updateVariants(){
 
   let variant1 = getVariant(product1Variants, q1);
   let variant2 = getVariant(product2Variants, q2);
-
+alert(variant1);
+alert(variant2);
   $('.custom_checkout_button')
     .attr('variant_id', variant1 ? variant1 : '')
     .attr('variant_id2', variant2 ? variant2 : '');
