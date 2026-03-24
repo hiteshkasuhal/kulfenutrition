@@ -854,7 +854,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      <span class="subscription_trigger" data_tab="2" style="display:none;">
              {%- for variant in product.variants -%}
              <span class="product_price_custom price_trigger{% if variant.id == produc.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product.variants[0].id %} style="display:none;"{% endif %}>
+              {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
             {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
+              {% else %}
+            {% assign price = variant.price %}
+              {% endif %}
             {% assign compare_price = variant.price %}
     {% if variant.compare_at_price > variant.price %}
             {% assign compare_price = variant.compare_at_price %}
@@ -890,7 +894,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      <span class="subscription_trigger" data_tab="2" style="display:none;">
              {%- for variant in product2.variants -%}
              <span class="product_price_custom price_trigger{% if variant.id == product2.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product2.variants[0].id %} style="display:none;"{% endif %}>
+             {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
             {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
+              {% else %}
+            {% assign price = variant.price %}
+              {% endif %}
             {% assign compare_price = variant.price %}
     {% if variant.compare_at_price > variant.price %}
             {% assign compare_price = variant.compare_at_price %}
@@ -960,7 +968,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      <div class="subscription_trigger" data_tab="2" style="display:none;">
              {%- for variant in product.variants -%}
              <div class="product_price_custom price_trigger one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product.variants[1].id %} style="display:none;"{% endif %}>
+              {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
             {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
+              {% else %}
+            {% assign price = variant.price %}
+              {% endif %}
             {% assign compare_price = variant.price %}
     {% if variant.compare_at_price > variant.price %}
             {% assign compare_price = variant.compare_at_price %}
@@ -1012,7 +1024,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 {% assign quantity = 1 %}
   {% if forloop.index == 1 %}
 {% if block.settings.title1 != blank %}
-  <div class="variant_title">{{block.settings.title1 }}</div>
+  <div class="variant_title" title="{{ block.settings.title1 }}">{{block.settings.title1 }}</div>
   {% else %}
   <div class="variant_title">{{ variant.title }}</div>
   {% endif %}
@@ -1020,7 +1032,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      {% if forloop.index == 2 %}
 {% assign quantity = 2 %}
 {% if block.settings.title2 != blank %}
-  <div class="variant_title">{{block.settings.title2 }}</div>
+  <div class="variant_title" title="{{ block.settings.title2 }}">{{block.settings.title2 }}</div>
   {% else %}
   <div class="variant_title">{{ variant.title }}</div>
   {% endif %}
@@ -1028,7 +1040,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      {% if forloop.index == 3 %}
 {% assign quantity = 3 %}
 {% if block.settings.title3 != blank %}
-  <div class="variant_title">{{block.settings.title3 }}</div>
+  <div class="variant_title" title="3 Bottles">{{block.settings.title3 }}</div>
   {% else %}
   <div class="variant_title">{{ variant.title }}</div>
   {% endif %}
@@ -1095,7 +1107,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
   <div class="subscription_trigger" data_tab="2" style="display:none;">
-    {% assign save = variant.compare_at_price | minus:  variant.selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros  %}
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
+    {% assign save = variant.compare_at_price | minus:  variant.selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:  variant.price | money_without_trailing_zeros %}
+              {% endif %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
   </div>
@@ -1104,7 +1120,12 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     {% assign save = variant.compare_at_price | minus: product2.variants[variant_loop].price | money_without_trailing_zeros %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
-  <div class="subscription_trigger" data_tab="2" style="display:none;">
+  <div class="subscription_trigger" data_tab="2" style="display:none;"> 
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
+    {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].price | money_without_trailing_zeros %}
+              {% endif %}
     {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
@@ -1136,7 +1157,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge3 | replace:'[save]',save }}</div>
   </div>
   <div class="subscription_trigger" data_tab="2" style="display:none;">
-    {% assign save = variant.compare_at_price | minus:  variant.selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros  %}
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
+    {% assign save = variant.compare_at_price | minus:  variant.selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:  variant.price | money_without_trailing_zeros %}
+              {% endif %}
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   </div>
@@ -1146,7 +1171,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   <div class="subscription_trigger" data_tab="2" style="display:none;">
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
     {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:   product2.variants[variant_loop].price | money_without_trailing_zeros %}
+              {% endif %}
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   </div>
@@ -1166,7 +1195,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   <div class="subscription_trigger" data_tab="2" style="display:none;">
 <div class="option_item_price">
   {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{% else %}<s>{{ variant.price | money }}</s>{%endif %}
-<span>{{ variant.selling_plan_allocations.first.per_delivery_price  | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
+<span>{{ variant.selling_plan_allocations.first.per_delivery_price | default: variant.price  | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
 </div>
   </div>
 </div>
@@ -1181,7 +1210,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   <div class="subscription_trigger" data_tab="2" style="display:none;">
 <div class="option_item_price">
   {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{% else %}<s>{{ variant.price | money }}</s>{%endif %}
-<span>{{ product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
+<span>{{ product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | default: product2.variants[variant_loop].price | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
 </div>
   </div>
 </div>
@@ -2042,7 +2071,59 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
                   </script>
 
 
+            {%- when 'quantity_custom' -%}
+{% assign product_1 = section.settings.product %}
 
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'product2' %}
+      {% assign product_2 = block.settings.product %}
+  {% endcase %}
+{% endfor %}
+<script>
+var product1Variants = {{ product_1.variants | json }};
+var product2Variants = {{ product_2.variants | json }};
+</script>
+<script>
+var product1Id = {{ product_1.id | json }};
+var product2Id = {{ product_2.id | json }};
+</script>
+<div class="customize_quantity">
+<div class="customize_quantity_flex">
+<div class="customize_quantity_item product1_quantity">
+<div class="customize_item_flex">
+<div class="customize_item_button customize_item_minus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+<div class="customize_item_quantity"><input type="number" name="quantity_product1" value="1" readonly></div>
+<div class="customize_item_button customize_item_plus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M8 3.33331V12.6666" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
+</div>
+<div class="customize_quantity_item product2_quantity">
+<div class="customize_item_flex">
+<div class="customize_item_button customize_item_minus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+<div class="customize_item_quantity"><input type="number" name="quantity_product2" value="0" readonly></div>
+<div class="customize_item_button customize_item_plus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M8 3.33331V12.6666" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
             {% endcase %}
        {% endfor %}
      </div>
@@ -3312,7 +3393,14 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     "label": "Custom Class"
   }
     ]
-  }
+  },
+    {
+      "type": "quantity_custom",
+      "name": "Quantity Custom",
+      "limit":1,
+      "settings": [
+      ]
+    }
   ],
   "presets": [
     {
@@ -3420,32 +3508,87 @@ adaptiveHeight: false,
     }
   ]
 });
-$(document).on("click", '.trigger_{{ section.id }}', function(e) {
+$(document).on("click", '.trigger_{{ section.id }}', function(e){
+
   e.preventDefault();
-  var $btn = $(this).addClass('loading_hk'),
-      id = $btn.attr('variant_id'),
-      quantity = $btn.attr('quantity'),
-      selling_plan = $btn.attr('selling_plan'),
-      data = { id: id, quantity: quantity };
 
-  if (selling_plan) data.selling_plan = selling_plan;
+  var $btn = $(this).addClass('loading_hk');
 
-  $.post('/cart/add.js', data, function () {
-    $.get(window.location.pathname, function (res) {
-         // Update cart count
-      const $newCartCount = $(res).find('.cart_count_js');
-      const cartCount = parseInt($newCartCount.text().trim(), 10);
-      
-      if (cartCount > 0) {
-        $('.cart_count_js').text(cartCount).show();
-      } else {
-        $('.cart_count_js').text('').hide();
-      }
-     window.upcartRefreshCart();
-     window.upcartOpenCart();
-      $btn.removeClass('loading_hk');
-    });
-  }, 'json');
+  var id1 = $btn.attr('variant_id');
+  var id2 = $btn.attr('variant_id2');
+
+  var quantity = $btn.attr('quantity') || 1;
+
+  var selling_plan1 = $btn.attr('selling_plan1');
+  var selling_plan2 = $btn.attr('selling_plan2');
+
+  var items = [];
+
+  if(id1){
+    var item1 = {
+      id: id1,
+      quantity: quantity
+    };
+
+    if(selling_plan1){
+      item1.selling_plan = selling_plan1;
+    }
+
+    items.push(item1);
+  }
+
+  if(id2){
+    var item2 = {
+      id: id2,
+      quantity: quantity
+    };
+
+    if(selling_plan2){
+      item2.selling_plan = selling_plan2;
+    }
+
+    items.push(item2);
+  }
+
+  if(!items.length){
+    $btn.removeClass('loading_hk');
+    return;
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "/cart/add.js",
+    data: JSON.stringify({ items: items }),
+    contentType: "application/json",
+    dataType: "json",
+    success: function(){
+
+      $.get(window.location.pathname, function(res){
+
+        const $newCartCount = $(res).find('.cart_count_js');
+        const cartCount = parseInt($newCartCount.text().trim(), 10);
+
+        if(cartCount > 0){
+          $('.cart_count_js').text(cartCount).show();
+        }else{
+          $('.cart_count_js').text('').hide();
+        }
+
+        if(window.upcartRefreshCart){
+          window.upcartRefreshCart();
+        }
+
+        if(window.upcartOpenCart){
+          window.upcartOpenCart();
+        }
+
+        $btn.removeClass('loading_hk');
+
+      });
+
+    }
+  });
+
 });
 $(document).on("click", '.trigger_{{ section.id }}2', function(e) {
   e.preventDefault();
@@ -3479,16 +3622,25 @@ $(document).on("click", '.option_item', function(e) {
 $(this).parents('.options_flex').find('.option_item').removeClass('active');  
 $(this).addClass('active');   
 
-var selected_variant_text = $('.option_item.active').eq(0).attr('variant_title');
+var selected_variant_text = $('.option_item.active .variant_title').eq(0).attr('title');
+$('.product_label_lp_variant p strong').text(selected_variant_text);
 
 var product_loop = $('.swicth_item.active').index();
 if(product_loop == 0){
 var variant_id = $(this).attr('variant_id');
+var selling_plan = $(this).attr('selling_plan');
 }
 if(product_loop == 1){
 var variant_id = $(this).attr('variant_id2');
+var selling_plan = $(this).attr('selling_plan2');
 }
+var quantity = $('.option_item.active').index();
+quantity = quantity + 1;
+$('.product1_quantity input').val(quantity);
+$('.product2_quantity input').val('0');
+
 $('span.custom_checkout_button').attr('variant_id',variant_id);
+$('span.custom_checkout_button').attr('selling_plan',selling_plan);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
 $('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]').show().addClass('active');
@@ -3697,3 +3849,174 @@ $(window).on('scroll resize', function () {
 }
 }
 </style>
+
+
+
+<script>
+$(document).ready(function(){
+
+function getQty(selector){
+  return Number($(selector).find('input').val()) || 0;
+}
+
+function getTotal(){
+  return getQty('.product1_quantity') + getQty('.product2_quantity');
+}
+
+function getVariant(productVariants, qty){
+
+  if(qty == 0) return null;
+
+  let index = qty - 1;
+
+  if(productVariants[index] && productVariants[index].available){
+
+    let variant = productVariants[index];
+
+    let sellingPlan = null;
+
+    if(variant.selling_plan_allocations && variant.selling_plan_allocations.length){
+      sellingPlan = variant.selling_plan_allocations[0].selling_plan_id;
+    }
+
+    return {
+      variant_id: variant.id,
+      selling_plan: sellingPlan
+    };
+  }
+
+  return null;
+}
+
+function updateVariants(){
+
+  let q1 = getQty('.product1_quantity');
+  let q2 = getQty('.product2_quantity');
+
+  let variant1 = getVariant(product1Variants, q1);
+  let variant2 = getVariant(product2Variants, q2);
+
+  $('.custom_checkout_button')
+    .attr('variant_id', variant1 ? variant1.variant_id : '')
+    .attr('variant_id2', variant2 ? variant2.variant_id : '')
+    .attr('selling_plan', variant1 ? variant1.selling_plan : '')
+    .attr('selling_plan2', variant2 ? variant2.selling_plan : '');
+var selected_tab = $('.subscription_item.active').attr('data_tab');
+if (selected_tab == '1'){
+$('.trigger_{{ section.id }}').removeAttr('selling_plan');
+$('.trigger_{{ section.id }}').removeAttr('selling_plan2');
+}
+}
+function updateButtons(){
+
+  let q1 = getQty('.product1_quantity');
+  let q2 = getQty('.product2_quantity');
+  let total = q1 + q2;
+
+  if(total >= 3){
+    $('.customize_item_plus').attr('disabled', true);
+  }else{
+    $('.customize_item_plus').removeAttr('disabled');
+  }
+
+  if(total > 0){
+
+    $('.option_item').removeClass('active');
+    $('.option_item').eq(total-1).addClass('active');
+
+
+    /* PRODUCT SWITCH LOGIC */
+
+    let activeProductId = null;
+
+    if(q1 > 0 && q2 == 0){
+      activeProductId = product1Id;
+    }
+    else if(q2 > 0 && q1 == 0){
+      activeProductId = product2Id;
+    }
+    else if(q1 > 0 && q2 > 0){
+      // if both selected choose last changed or priority
+      activeProductId = product1Id;
+    }
+    if(activeProductId){
+var totalqty = q1 + q2;
+var index_price = totalqty -1;
+      $('.custom_checkout_button_landing_page .product_switch')
+        .removeClass('active')
+        .hide();
+
+      $('.product_switch[data_tab="'+activeProductId+'"]')
+        .addClass('active')
+        .show();
+    }
+
+    /* PRICE SWITCH */
+
+    $('.product_switch.active .price_trigger')
+      .hide()
+      .removeClass('active');
+      $('.product_switch.active').each(function(){
+    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
+});
+      $('.product_switch.active .subscription_trigger').each(function(){
+    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
+});
+  }
+
+  updateVariants();
+}
+
+$('.customize_item_plus').click(function(){
+
+  if($(this).is('[disabled]')) return;
+
+  let parent = $(this).closest('.customize_quantity_item');
+  let input = parent.find('input');
+
+  let qty = Number(input.val()) || 0;
+  if(getTotal() >= 3) return;
+
+  let variants = parent.hasClass('product1_quantity')
+      ? product1Variants
+      : product2Variants;
+
+  let newQty = qty + 1;
+
+  if(!variants[newQty-1] || !variants[newQty-1].available){
+    return;
+  }
+
+  input.val(newQty);
+
+  parent.find('.customize_item_minus').removeAttr('disabled');
+
+  updateButtons();
+});
+
+$('.customize_item_minus').click(function(){
+
+  if($(this).is('[disabled]')) return;
+
+  let parent = $(this).closest('.customize_quantity_item');
+  let input = parent.find('input');
+
+  let qty = Number(input.val()) || 0;
+  if(qty <= 0) return;
+
+  let newQty = qty - 1;
+
+  input.val(newQty);
+
+  if(newQty == 0){
+    $(this).attr('disabled', true);
+  }
+
+  updateButtons();
+});
+
+/* init */
+updateButtons();
+
+}); 
+</script> 

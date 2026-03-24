@@ -42,28 +42,10 @@
             "custom_class": "kulfe_pdt_text1 desktop_only"
           }
         },
-        "richtext_8R7QNh": {
-          "type": "richtext",
-          "settings": {
-            "text": "<p>Choose your flavor: <strong>Falooda</strong></p>",
-            "custom_class": "product_label_lp product_label_lp_switch"
-          }
-        },
-        "product_switch_E6MrzP": {
-          "type": "product_switch",
-          "settings": {
-            "label1": "Falooda",
-            "image1": "shopify://shop_images/kulfe_pdt1_flavor1.webp",
-            "image1_mob": "shopify://shop_images/kulfe_pdt1_flavor1mob.webp",
-            "label2": "Mango",
-            "image2": "shopify://shop_images/kulfe_pdt1_flavor2.webp",
-            "image2_mob": "shopify://shop_images/kulfe_pdt1_flavor2mob.webp"
-          }
-        },
         "richtext_pJNgyy": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Choose your quantity: <strong>2 Bottles</strong></p>",
+            "text": "<p>1. Choose your quantity: <strong>1 Bottle</strong></p>",
             "custom_class": "product_label_lp product_label_lp_variant"
           }
         },
@@ -87,10 +69,39 @@
             "badge3": "Save [save] + Free Shipping"
           }
         },
+        "richtext_8R7QNh": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p>2. Choose your flavor: <strong>Falooda</strong></p>",
+            "custom_class": "product_label_lp product_label_lp_switch"
+          }
+        },
+        "product_switch_E6MrzP": {
+          "type": "product_switch",
+          "settings": {
+            "label1": "Falooda",
+            "image1": "shopify://shop_images/kulfe_pdt1_flavor1.webp",
+            "image1_mob": "shopify://shop_images/kulfe_pdt1_flavor1mob.webp",
+            "label2": "Mango",
+            "image2": "shopify://shop_images/kulfe_pdt1_flavor2.webp",
+            "image2_mob": "shopify://shop_images/kulfe_pdt1_flavor2mob.webp"
+          }
+        },
+        "richtext_tYM6Cj": {
+          "type": "richtext",
+          "settings": {
+            "text": "<p><a href=\"#customize\" title=\"#customize\">I want to customize flavors</a></p>",
+            "custom_class": "customize_text"
+          }
+        },
+        "quantity_custom_HpjrzC": {
+          "type": "quantity_custom",
+          "settings": {}
+        },
         "richtext_qqWCEJ": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Subscribe and <strong>Save 15%</strong></p>",
+            "text": "<p>3. Subscribe and <strong>Save 15% </strong></p>",
             "custom_class": "kulfe_pdt_text2"
           }
         },
@@ -218,10 +229,12 @@
         "rating_custom_KJbmJC",
         "heading_riQnGK",
         "richtext_RGaEDG",
-        "richtext_8R7QNh",
-        "product_switch_E6MrzP",
         "richtext_pJNgyy",
         "variants_fdXmTB",
+        "richtext_8R7QNh",
+        "product_switch_E6MrzP",
+        "richtext_tYM6Cj",
+        "quantity_custom_HpjrzC",
         "richtext_qqWCEJ",
         "subscription_rAatY9",
         "stock_GFzqtw",
@@ -361,7 +374,6 @@
         "button_RXk9AQ",
         "icons_with_text_gW3iyQ"
       ],
-      "disabled": true,
       "name": "Two Richtext Lpnew1",
       "settings": {
         "custom_class": "kulfe_section_1",
@@ -1365,6 +1377,7 @@
     }
   },
   "order": [
+    "richtext_lpnew_qAGKzR",
     "product_lp_eL6de3",
     "two_layer_richtext_lpnew_cj9G9x",
     "review_slider_lpnew_bW86xy",
@@ -1373,7 +1386,6 @@
     "richtext_lpnew_7FEJin",
     "two_layer_richtext_lpnew_8akcLU",
     "two_layer_richtext_lpnew_nLAEYt",
-    "richtext_lpnew_qAGKzR",
     "richtext_lpnew_NAwKez",
     "1761812076eb6fd02c",
     "two_layer_richtext_lpnew_n6zhd6",
