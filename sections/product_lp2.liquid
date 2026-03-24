@@ -3908,7 +3908,8 @@ function updateButtons(){
       activeProductId = product2Id;
     }
     if(activeProductId){
-
+var totalqty = q1 + q2;
+var index_price = totalqty -1;
       $('.product_switch')
         .removeClass('active')
         .hide();
@@ -3924,9 +3925,7 @@ function updateButtons(){
       .hide()
       .removeClass('active');
 
-    $('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]')
-      .show()
-      .addClass('active');
+    $('.product_switch.active .price_trigger').eq(index_price).show().addClass('active');
   }
 
   updateVariants();
