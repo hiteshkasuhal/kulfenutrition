@@ -196,6 +196,10 @@
             "custom_class": "customize_text"
           }
         },
+        "quantity_custom_VdMrbq": {
+          "type": "quantity_custom",
+          "settings": {}
+        },
         "richtext_qqWCEJ": {
           "type": "richtext",
           "disabled": true,
@@ -337,6 +341,7 @@
         "richtext_8R7QNh",
         "product_switch_E6MrzP",
         "richtext_K6h3nA",
+        "quantity_custom_VdMrbq",
         "richtext_qqWCEJ",
         "subscription_rAatY9",
         "stock_GFzqtw",
