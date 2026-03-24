@@ -3819,7 +3819,6 @@ $('.customize_item_plus').click(function(){
   let input = parent.find('input');
 
   let qty = Number(input.val()) || 0;
-alert(qty);
   if(getTotal() >= 3) return;
 
   let variants = parent.hasClass('product1_quantity')
@@ -3828,7 +3827,6 @@ alert(qty);
 
   let newQty = qty + 1;
 
-alert(newQty);
   if(!variants[newQty-1] || !variants[newQty-1].available){
     return;
   }
