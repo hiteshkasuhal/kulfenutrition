@@ -3887,7 +3887,7 @@ function updateButtons(){
     $('.option_item').removeClass('active');
     $('.option_item').eq(total-1).addClass('active');
 
-    let variant_id = $('.option_item.active').attr('variant_id2');
+    let variant_id = $('.option_item.active').attr('variant_id');
 
     /* PRODUCT SWITCH LOGIC */
 
@@ -3903,7 +3903,7 @@ function updateButtons(){
       // if both selected choose last changed or priority
       activeProductId = product2Id;
     }
-
+alert(activeProductId);
     if(activeProductId){
 
       $('.product_switch')
@@ -3928,6 +3928,7 @@ function updateButtons(){
 
   updateVariants();
 }
+
 
 $('.customize_item_plus').click(function(){
 
