@@ -3541,9 +3541,11 @@ $('.product_label_lp_variant p strong').text(selected_variant_text);
 var product_loop = $('.swicth_item.active').index();
 if(product_loop == 0){
 var variant_id = $(this).attr('variant_id');
+var selling_plan = $(this).attr('selling_plan');
 }
 if(product_loop == 1){
 var variant_id = $(this).attr('variant_id2');
+var selling_plan = $(this).attr('selling_plan2');
 }
 var quantity = $('.option_item.active').index();
 quantity = quantity + 1;
@@ -3551,6 +3553,7 @@ $('.product2_quantity input').val(quantity);
 $('.product1_quantity input').val('0');
 
 $('span.custom_checkout_button').attr('variant_id',variant_id);
+$('span.custom_checkout_button').attr('selling_plan',selling_plan);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
 $('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]').show().addClass('active');
