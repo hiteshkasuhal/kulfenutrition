@@ -2042,7 +2042,55 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
                   </script>
 
 
+            {%- when 'quantity_custom' -%}
+{% assign product_1 = section.settings.product %}
 
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'product2' %}
+      {% assign product_2 = block.settings.product %}
+  {% endcase %}
+{% endfor %}
+<script>
+var product1Variants = {{ product_1.variants | json }};
+var product2Variants = {{ product_2.variants | json }};
+</script>
+<div class="customize_quantity">
+<div class="customize_quantity_flex">
+<div class="customize_quantity_item product1_quantity">
+<div class="customize_item_flex">
+<div class="customize_item_button customize_item_minus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+<div class="customize_item_quantity"><input type="number" name="quantity_product1" value="1" readonly></div>
+<div class="customize_item_button customize_item_plus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M8 3.33331V12.6666" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
+</div>
+<div class="customize_quantity_item product2_quantity">
+<div class="customize_item_flex">
+<div class="customize_item_button customize_item_minus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+<div class="customize_item_quantity"><input type="number" name="quantity_product2" value="0" readonly></div>
+<div class="customize_item_button customize_item_plus">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M8 3.33331V12.6666" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M3.33594 8H12.6693" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
             {% endcase %}
        {% endfor %}
      </div>
