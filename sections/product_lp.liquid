@@ -3927,11 +3927,8 @@ var index_price = totalqty -1;
     $('.product_switch.active .price_trigger')
       .hide()
       .removeClass('active');
-
-    $('.product_switch.active .subscription_trigger').each(function(){
-    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
-    });
     $('.product_switch.active .price_trigger').eq(index_price).show().addClass('active');
+    $('.product_switch.active .subscription_trigger .price_trigger').eq(index_price).show().addClass('active');
   }
 
   updateVariants();
