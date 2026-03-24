@@ -3905,12 +3905,11 @@ function updateButtons(){
     }
     else if(q1 > 0 && q2 > 0){
       // if both selected choose last changed or priority
-      activeProductId = product2Id;
+      activeProductId = product1Id;
     }
     if(activeProductId){
 var totalqty = q1 + q2;
 var index_price = totalqty -1;
-alert(index_price);
       $('.product_switch')
         .removeClass('active')
         .hide();
