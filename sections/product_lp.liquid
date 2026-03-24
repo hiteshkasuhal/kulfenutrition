@@ -3924,14 +3924,14 @@ var index_price = totalqty -1;
 
     /* PRICE SWITCH */
 
-    $('.product_switch .price_trigger')
+    $('.product_switch.active .price_trigger')
       .hide()
       .removeClass('active');
 
-    $('.product_switch .subscription_trigger').each(function(){
+    $('.product_switch.active .subscription_trigger').each(function(){
     $(this).find('.price_trigger').eq(index_price).show().addClass('active');
     });
-    $('.product_switch .price_trigger').eq(index_price).show().addClass('active');
+    $('.product_switch.active .price_trigger').eq(index_price).show().addClass('active');
   }
 
   updateVariants();
