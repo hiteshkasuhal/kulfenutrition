@@ -3779,7 +3779,19 @@ function getVariant(productVariants, qty){
   let index = qty - 1;
 
   if(productVariants[index] && productVariants[index].available){
-    return productVariants[index].id;
+
+    let variant = productVariants[index];
+
+    let sellingPlan = null;
+
+    if(variant.selling_plan_allocations && variant.selling_plan_allocations.length){
+      sellingPlan = variant.selling_plan_allocations[0].selling_plan_id;
+    }
+
+    return {
+      variant_id: variant.id,
+      selling_plan: sellingPlan
+    };
   }
 
   return null;
@@ -3792,13 +3804,13 @@ function updateVariants(){
 
   let variant1 = getVariant(product1Variants, q1);
   let variant2 = getVariant(product2Variants, q2);
-alert(variant1);
-alert(variant2);
-  $('.custom_checkout_button')
-    .attr('variant_id', variant1 ? variant1 : '')
-    .attr('variant_id2', variant2 ? variant2 : '');
-}
 
+  $('.custom_checkout_button')
+    .attr('variant_id', variant1 ? variant1.variant_id : '')
+    .attr('variant_id2', variant2 ? variant2.variant_id : '')
+    .attr('selling_plan1', variant1 ? variant1.selling_plan : '')
+    .attr('selling_plan2', variant2 ? variant2.selling_plan : '');
+}
 function updateButtons(){
 
   let total = getTotal();
