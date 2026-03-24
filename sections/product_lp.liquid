@@ -3868,10 +3868,23 @@ function updateVariants(){
     .attr('variant_id2', variant2 ? variant2.variant_id : '')
     .attr('selling_plan', variant1 ? variant1.selling_plan : '')
     .attr('selling_plan2', variant2 ? variant2.selling_plan : '');
+
+    
+    /* PRICE SWITCH */
+
+    $('.product_switch.active .price_trigger')
+      .hide()
+      .removeClass('active');
+
+    $('.product_switch.active .price_trigger[data_tab="'+variant1.variant_id+'"]')
+      .show()
+      .addClass('active');
 }
 function updateButtons(){
 
-  let total = getTotal();
+  let q1 = getQty('.product1_quantity');
+  let q2 = getQty('.product2_quantity');
+  let total = q1 + q2;
 
   if(total >= 3){
     $('.customize_item_plus').attr('disabled', true);
@@ -3880,11 +3893,38 @@ function updateButtons(){
   }
 
   if(total > 0){
+
     $('.option_item').removeClass('active');
     $('.option_item').eq(total-1).addClass('active');
-    var variant_id = $('.option_item.active').attr('variant_id');
-$('.product_switch.active .price_trigger').hide().removeClass('active');
-$('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]').show().addClass('active');
+
+    let variant_id = $('.option_item.active').attr('variant_id2');
+
+    /* PRODUCT SWITCH LOGIC */
+
+    let activeProductId = null;
+
+    if(q1 > 0 && q2 == 0){
+      activeProductId = product1Id;
+    }
+    else if(q2 > 0 && q1 == 0){
+      activeProductId = product2Id;
+    }
+    else if(q1 > 0 && q2 > 0){
+      // if both selected choose last changed or priority
+      activeProductId = product2Id;
+    }
+
+    if(activeProductId){
+
+      $('.product_switch')
+        .removeClass('active')
+        .hide();
+
+      $('.product_switch[data_tab="'+activeProductId+'"]')
+        .addClass('active')
+        .show();
+    }
+
   }
 
   updateVariants();
