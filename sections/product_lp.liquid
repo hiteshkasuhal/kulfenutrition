@@ -3773,10 +3773,14 @@ function getTotal(){
 }
 
 function getVariant(productVariants, qty){
+
   if(qty == 0) return null;
 
-  let variant = productVariants.find(v => v.option1 == qty.toString());
-  if(variant && variant.available) return variant.id;
+  let index = qty - 1;
+
+  if(productVariants[index] && productVariants[index].available){
+    return productVariants[index].id;
+  }
 
   return null;
 }
