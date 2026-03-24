@@ -55,7 +55,6 @@
 .kulfe_pdt_heading {
     text-transform: capitalize;
 }
-
 @media (max-width:915px) {
 .under_title_list ul li {
     max-width: 146px;
