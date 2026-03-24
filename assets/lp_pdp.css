@@ -2993,3 +2993,14 @@ body {
     line-height: 16px;
     z-index: 1;
 }
+.swicth_item.ofs_item {
+    border-color: rgba(0, 0, 0, 0.40) !important;
+    background: #FFF !important;
+    opacity: 1 !important;
+}
+.swicth_item.ofs_item img, .swicth_item.ofs_item span:not(.ofs_badge) {
+    opacity: .4;
+}
+@media (min-width:915px) {
+
+}
