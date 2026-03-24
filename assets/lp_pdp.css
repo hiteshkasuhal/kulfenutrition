@@ -2861,7 +2861,7 @@ body {
     display: none;
 }
 .landing_product_flex:has(.no_selling_plan.active) .options_main {
-    padding-bottom: 0;
+    //padding-bottom: 0;
 }
 /* ashish css end */
 
@@ -2947,6 +2947,9 @@ body {
 .product_swictcher .product_swictcher_flex {
     padding-bottom: 20px;
 }
+.kulfe_pdt_text2 {
+    padding-top: 35px;
+}
 @media (max-width:915px) {
 .customize_quantity_flex {
     gap: 10px;
@@ -2962,5 +2965,8 @@ body {
 
 .product_swictcher .product_swictcher_flex {
     padding-bottom: 15px;
+}
+.kulfe_pdt_text2 {
+    padding-top: 25px;
 }
 }
