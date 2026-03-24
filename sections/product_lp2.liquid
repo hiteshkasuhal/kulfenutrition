@@ -854,7 +854,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      <span class="subscription_trigger" data_tab="2" style="display:none;">
              {%- for variant in product.variants -%}
              <span class="product_price_custom price_trigger{% if variant.id == product.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product.variants[0].id %} style="display:none;"{% endif %}>
+             {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
             {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
+              {% else %}
+            {% assign price = variant.price %}
+              {% endif %}
             {% assign compare_price = variant.price %}
     {% if variant.compare_at_price > variant.price %}
             {% assign compare_price = variant.compare_at_price %}
@@ -890,7 +894,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
      <span class="subscription_trigger" data_tab="2" style="display:none;">
              {%- for variant in product2.variants -%}
              <span class="product_price_custom price_trigger{% if variant.id == product2.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product2.variants[0].id %} style="display:none;"{% endif %}>
+             {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
             {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
+              {% else %}
+            {% assign price = variant.price %}
+              {% endif %}
             {% assign compare_price = variant.price %}
     {% if variant.compare_at_price > variant.price %}
             {% assign compare_price = variant.compare_at_price %}
@@ -3909,7 +3917,7 @@ function updateButtons(){
     if(activeProductId){
 var totalqty = q1 + q2;
 var index_price = totalqty -1;
-      $('.product_switch')
+      $('.custom_checkout_button_landing_page .product_switch')
         .removeClass('active')
         .hide();
 
