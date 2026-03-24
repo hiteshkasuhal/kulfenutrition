@@ -2055,6 +2055,10 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 var product1Variants = {{ product_1.variants | json }};
 var product2Variants = {{ product_2.variants | json }};
 </script>
+<script>
+var product1Id = {{ product_1.id | json }};
+var product2Id = {{ product_2.id | json }};
+</script>
 <div class="customize_quantity">
 <div class="customize_quantity_flex">
 <div class="customize_quantity_item product1_quantity">
@@ -3902,7 +3906,6 @@ function updateButtons(){
       // if both selected choose last changed or priority
       activeProductId = product2Id;
     }
-alert(activeProductId);
     if(activeProductId){
 
       $('.product_switch')
