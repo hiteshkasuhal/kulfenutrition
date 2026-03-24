@@ -3001,6 +3001,6 @@ body {
 .swicth_item.ofs_item img, .swicth_item.ofs_item span:not(.ofs_badge) {
     opacity: .4;
 }
-@media (min-width:915px) {
-
+.swicth_item.ofs_item {
+    overflow: hidden !important;
 }
