@@ -101,7 +101,7 @@
         "richtext_qqWCEJ": {
           "type": "richtext",
           "settings": {
-            "text": "<p>3. Subscribe and <strong>Save 15%</strong></p>",
+            "text": "<p>3. Subscribe and <strong>Save 15% </strong></p>",
             "custom_class": "kulfe_pdt_text2"
           }
         },
