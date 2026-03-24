@@ -3703,3 +3703,110 @@ $(window).on('scroll resize', function () {
 }
 }
 </style>
+
+
+
+<script>
+$(document).ready(function(){
+
+function getQty(selector){
+  return Number($(selector).find('input').val()) || 0;
+}
+
+function getTotal(){
+  return getQty('.product1_quantity') + getQty('.product2_quantity');
+}
+
+function getVariant(productVariants, qty){
+  if(qty == 0) return null;
+
+  let variant = productVariants.find(v => v.option1 == qty.toString());
+  if(variant && variant.available) return variant.id;
+
+  return null;
+}
+
+function updateVariants(){
+
+  let q1 = getQty('.product1_quantity');
+  let q2 = getQty('.product2_quantity');
+
+  let variant1 = getVariant(product1Variants, q1);
+  let variant2 = getVariant(product2Variants, q2);
+
+  $('.custom_checkout_button')
+    .attr('variant_id', variant1 ? variant1 : '')
+    .attr('variant_id2', variant2 ? variant2 : '');
+}
+
+function updateButtons(){
+
+  let total = getTotal();
+
+  if(total >= 3){
+    $('.customize_item_plus').attr('disabled', true);
+  }else{
+    $('.customize_item_plus').removeAttr('disabled');
+  }
+
+  if(total > 0){
+    $('.option_item').eq(total-1).trigger('click');
+  }
+
+  updateVariants();
+}
+
+$('.customize_item_plus').click(function(){
+
+  if($(this).is('[disabled]')) return;
+
+  let parent = $(this).closest('.customize_quantity_item');
+  let input = parent.find('input');
+
+  let qty = Number(input.val()) || 0;
+
+  if(getTotal() >= 3) return;
+
+  let variants = parent.hasClass('product1_quantity')
+      ? product1Variants
+      : product2Variants;
+
+  let newQty = qty + 1;
+
+  if(!variants[newQty-1] || !variants[newQty-1].available){
+    return;
+  }
+
+  input.val(newQty);
+
+  parent.find('.customize_item_minus').removeAttr('disabled');
+
+  updateButtons();
+});
+
+$('.customize_item_minus').click(function(){
+
+  if($(this).is('[disabled]')) return;
+
+  let parent = $(this).closest('.customize_quantity_item');
+  let input = parent.find('input');
+
+  let qty = Number(input.val()) || 0;
+  if(qty <= 0) return;
+
+  let newQty = qty - 1;
+
+  input.val(newQty);
+
+  if(newQty == 0){
+    $(this).attr('disabled', true);
+  }
+
+  updateButtons();
+});
+
+/* init */
+updateButtons();
+
+}); 
+</script> 
