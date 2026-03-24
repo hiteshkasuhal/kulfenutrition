@@ -3805,7 +3805,11 @@ function updateButtons(){
   }
 
   if(total > 0){
-    $('.option_item').eq(total-1).trigger('click');
+    $('.option_item').removeClass('active');
+    $('.option_item').eq(total-1).addClass('active');
+    var variant_id = $('.option_item.active').attr('variant_id');
+$('.product_switch.active .price_trigger').hide().removeClass('active');
+$('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]').show().addClass('active');
   }
 
   updateVariants();
