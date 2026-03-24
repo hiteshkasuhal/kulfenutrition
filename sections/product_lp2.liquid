@@ -1114,7 +1114,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
   <div class="subscription_trigger" data_tab="2" style="display:none;">
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
     {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:   product2.variants[variant_loop].price | money_without_trailing_zeros %}
+              {% endif %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
   </div>
@@ -1155,7 +1159,11 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   <div class="subscription_trigger" data_tab="2" style="display:none;">
+     {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
     {% assign save = variant.compare_at_price | minus:  product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | money_without_trailing_zeros %}
+              {% else %}
+    {% assign save = variant.compare_at_price | minus:   product2.variants[variant_loop].price | money_without_trailing_zeros %}
+              {% endif %}
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   </div>
