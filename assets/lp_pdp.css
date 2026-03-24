@@ -2944,6 +2944,9 @@ body {
     background: #fff;
 }
 
+.product_swictcher .product_swictcher_flex {
+    padding-bottom: 20px;
+}
 @media (max-width:915px) {
 .customize_quantity_flex {
     gap: 10px;
