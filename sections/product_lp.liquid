@@ -3868,17 +3868,6 @@ function updateVariants(){
     .attr('variant_id2', variant2 ? variant2.variant_id : '')
     .attr('selling_plan', variant1 ? variant1.selling_plan : '')
     .attr('selling_plan2', variant2 ? variant2.selling_plan : '');
-
-    
-    /* PRICE SWITCH */
-
-    $('.product_switch.active .price_trigger')
-      .hide()
-      .removeClass('active');
-
-    $('.product_switch.active .price_trigger[data_tab="'+variant1.variant_id+'"]')
-      .show()
-      .addClass('active');
 }
 function updateButtons(){
 
@@ -3925,6 +3914,15 @@ alert(activeProductId);
         .show();
     }
 
+    /* PRICE SWITCH */
+
+    $('.product_switch.active .price_trigger')
+      .hide()
+      .removeClass('active');
+
+    $('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]')
+      .show()
+      .addClass('active');
   }
 
   updateVariants();
