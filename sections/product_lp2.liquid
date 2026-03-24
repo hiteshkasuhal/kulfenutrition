@@ -1190,7 +1190,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   <div class="subscription_trigger" data_tab="2" style="display:none;">
 <div class="option_item_price">
   {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{% else %}<s>{{ variant.price | money }}</s>{%endif %}
-<span>{{ product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | default:variant.price | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
+<span>{{ product2.variants[variant_loop].selling_plan_allocations.first.per_delivery_price | default: product2.variants[variant_loop].price | money }}{%if quantity > 1 %}{{ block.settings.per_text }}{%endif %}</span>
 </div>
   </div>
 </div>
