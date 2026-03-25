@@ -2,7 +2,7 @@
 
 <html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
   <head>
-{% render 'replo-head' %}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
 
@@ -12,12 +12,15 @@
       <meta name="description" content="{{ page_description | escape }}">
     {%- endif -%}
 
-    <link rel="canonical" href="{{ canonical_url }}">
-
     {%- if settings.favicon -%}
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
       <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
     {%- endif -%}
+    {%- render 'social-meta-tags' -%}
+
+
+    {% render 'replo-head' %}
+    <link rel="canonical" href="{{ canonical_url }}">
 
     {%- comment -%}Few prefetch to increase performance on commonly used third-parties{%- endcomment -%}
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -30,7 +33,6 @@
       <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
     {%- endunless -%}
 
-    {%- render 'social-meta-tags' -%}
     {%- render 'microdata-schema' -%}
     {%- render 'css-variables' -%}
     {%- render 'js-variables' -%}
