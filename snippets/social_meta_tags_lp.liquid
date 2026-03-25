@@ -15,7 +15,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ page_title | escape }}">
 {%- endif -%}
-
+{% render "vital" %}
 {%- if page_image -%}
   <meta property="og:image" content="http:{{ page_image | image_url: width: 2048 }}">
   <meta property="og:image:secure_url" content="https:{{ page_image | image_url: width: 2048 }}">
@@ -26,13 +26,13 @@
 {%- if page_description -%}
   <meta property="og:description" content="{{ page_description | escape }}">
 {%- endif -%}
-
+{% render "essential" %}
 <meta property="og:url" content="{{ canonical_url }}">
 <meta property="og:site_name" content="{{ shop.name }}">
 
 
 <meta name="twitter:card" content="summary">
-
+{% render "scripts" %}
 {%- if request.page_type == 'product' -%}
   <meta name="twitter:title" content="{{ product.title | escape }}">
   <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
