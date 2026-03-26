@@ -3016,3 +3016,8 @@ body {
 .custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
     display: none;
 }
+.custom_checkout_button_landing_page div#klaviyo-bis-button-container button {
+    background: #000;
+    border-radius: 100px;
+    font-family: DM Sans !important;
+}
