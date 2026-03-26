@@ -3004,3 +3004,15 @@ body {
 .swicth_item.ofs_item {
     overflow: hidden !important;
 }
+
+
+
+.custom_checkout_button_landing_page:has(.product_switch.active .sold_out_custom.active) a.klaviyo-bis-trigger {
+    display: flex !important;
+}
+a.klaviyo-bis-trigger {
+    display: none !important;
+}
+.custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
+    display: none;
+}
