@@ -3010,7 +3010,7 @@ body {
 .custom_checkout_button_landing_page:has(.product_switch.active .sold_out_custom.active) div#klaviyo-bis-button-container {
     display: flex !important;
 }
-div#klaviyo-bis-button-container {
+a.klaviyo-bis-trigger, div#klaviyo-bis-button-container {
     display: none !important;
 }
 .custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
