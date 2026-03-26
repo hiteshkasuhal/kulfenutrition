@@ -3022,3 +3022,9 @@ body {
     font-family: DM Sans !important;
     min-height: 60px;
 }
+
+@media (max-width:915px) {
+.custom_checkout_button_landing_page div#klaviyo-bis-button-container button {
+    min-height: 45px;
+}
+}
