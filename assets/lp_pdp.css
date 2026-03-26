@@ -3013,7 +3013,7 @@ body {
 .custom_checkout_button_landing_page a.klaviyo-bis-trigger, .custom_checkout_button_landing_page div#klaviyo-bis-button-container {
     display: none !important;
 }
-.custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
+.custom_checkout_button_landing_page:has(div#klaviyo-bis-button-container) .custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
     display: none;
 }
 .custom_checkout_button_landing_page div#klaviyo-bis-button-container button {
