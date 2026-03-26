@@ -3020,4 +3020,5 @@ body {
     background: #000;
     border-radius: 100px;
     font-family: DM Sans !important;
+    min-height: 60px;
 }
