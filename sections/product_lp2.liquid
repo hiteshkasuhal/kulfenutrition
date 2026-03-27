@@ -825,7 +825,6 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
                 {%- endif -%}
               </div> 
     {% when 'checkout_button' %}
-
             {% assign atc_text = block.settings.text %}
 <select name="variants_id" style="display:none;">
 {% for variant in product.variants %}
@@ -833,6 +832,8 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 {% endfor %}
 </select>
           <div class="custom_checkout_button_landing_page">
+            
+<a class="klaviyo-bis-trigger" href="#">Notify Me When Available</a>
             <span class="custom_checkout_button custom_lp_button trigger_{{ section.id }} custom_hk_button" quantity="1" variant_id="{{ product2.variants[0].id }}" selling_plan="">
 
 
@@ -1749,7 +1750,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     {% when 'product_switch' %}
           <div class="product_swictcher">
                  <div class="product_swictcher_flex">
-<div class="swicth_item{% if product.available %}{% else %} ofs_item{% endif %}" data_href="{{ product.url }}" data_tab="{{ product.id }}">
+<div class="swicth_item" data_href="{{ product.url }}" data_tab="{{ product.id }}">
   {% if product.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
   <span>{{ block.settings.label1 }}
 </span>
@@ -1760,7 +1761,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 <img src="{{ block.settings.image1_mob | image_url }}" width="auto" height="auto" loading="eager" fetchpriority="high" alt="{{ block.settings.image1_mob.alt }}" class="mobile_only">
 {% endif %}
 </div>
-<div class="swicth_item active{% if product2.available %}{% else %} ofs_item{% endif %}" data_tab="{{ product2.id }}">
+<div class="swicth_item active" data_tab="{{ product2.id }}">
   {% if product2.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
   <span>{{ block.settings.label2 }}</span>
 {% if block.settings.image2 != blank %}

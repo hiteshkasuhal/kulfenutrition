@@ -3004,3 +3004,27 @@ body {
 .swicth_item.ofs_item {
     overflow: hidden !important;
 }
+
+
+
+.custom_checkout_button_landing_page:has(.product_switch.active .sold_out_custom.active) div#klaviyo-bis-button-container {
+    display: block !important;
+}
+.custom_checkout_button_landing_page a.klaviyo-bis-trigger, .custom_checkout_button_landing_page div#klaviyo-bis-button-container {
+    display: none !important;
+}
+.custom_checkout_button_landing_page:has(div#klaviyo-bis-button-container) .custom_checkout_button:has(.product_switch.active .sold_out_custom.active) {
+    display: none;
+}
+.custom_checkout_button_landing_page div#klaviyo-bis-button-container button {
+    background: #000;
+    border-radius: 100px;
+    font-family: DM Sans !important;
+    min-height: 60px;
+}
+
+@media (max-width:915px) {
+.custom_checkout_button_landing_page div#klaviyo-bis-button-container button {
+    min-height: 45px;
+}
+}
