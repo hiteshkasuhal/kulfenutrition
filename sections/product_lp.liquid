@@ -1754,7 +1754,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     {% when 'product_switch' %}
           <div class="product_swictcher">
                  <div class="product_swictcher_flex">
-<div class="swicth_item active{% if product.available %}{% else %} ofs_item{% endif %}" data_tab="{{ product.id }}">
+<div class="swicth_item active{% if product.available %}{% else %} ofs_item{% endif %}" data_href="{{ product.url }}" data_tab="{{ product.id }}">
   {% if product.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
   <span>{{ block.settings.label1 }}
 </span>
@@ -3553,7 +3553,7 @@ $(document).on("click", '.trigger_{{ section.id }}', function(e){
     }
 
     items.push(item2);
-  }
+  }data
 
   if(!items.length){
     $btn.removeClass('loading_hk');
