@@ -1761,7 +1761,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 <img src="{{ block.settings.image1_mob | image_url }}" width="auto" height="auto" loading="eager" fetchpriority="high" alt="{{ block.settings.image1_mob.alt }}" class="mobile_only">
 {% endif %}
 </div>
-<div class="swicth_item active" data_tab="{{ product2.id }}">
+<div class="swicth_item active" data_href="{{ product2.url }}" data_tab="{{ product2.id }}">
   {% if product2.available %}{% else %}<span class="ofs_badge">Out of stock</span>{% endif %}
   <span>{{ block.settings.label2 }}</span>
 {% if block.settings.image2 != blank %}
@@ -3521,7 +3521,7 @@ $(document).on("click", '.trigger_{{ section.id }}', function(e){
 
   var quantity = $btn.attr('quantity') || 1;
 
-  var selling_plan1 = $btn.attr('selling_plan');
+  var selling_plan1 = $btn.attr('selling_plan1');
   var selling_plan2 = $btn.attr('selling_plan2');
 
   var items = [];
