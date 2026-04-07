@@ -75,6 +75,11 @@
         "type": "shopify://apps/essential-announcer/blocks/app-embed/93b5429f-c8d6-4c33-ae14-250fd84f361b",
         "disabled": false,
         "settings": {}
+      },
+      "16364584301514234833": {
+        "type": "shopify://apps/order-editing/blocks/sidebar/04cce4a7-c7bb-4d13-af81-560a17babbf3",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
