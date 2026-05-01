@@ -3612,8 +3612,7 @@ $('.customize_item_quantity input').each(function(){
 });
 alert(quantity);
 
-$('span.custom_checkout_button').attr('variant_id',variant_id);
-$('span.custom_checkout_button').attr('selling_plan',selling_plan);
+$('span.custom_checkout_button').attr('quantity',quantity);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
 $('.product_switch.active .price_trigger[data_tab="'+quantity+'"]').show().addClass('active');
