@@ -12,7 +12,6 @@ Use the Facebook Open Graph Debugger for validation (and cache clearing)
 Validate your Pinterest rich pins
 - https://developers.pinterest.com/tools/url-debugger/
 {%- endcomment -%}
-{% render "vital" %}
 {%- if request.page_type == 'product' -%}
   <meta property="og:type" content="product">
   <meta property="og:title" content="{{ product.title | strip_html | escape }}">
