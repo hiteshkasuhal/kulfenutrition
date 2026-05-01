@@ -3863,7 +3863,8 @@ $(window).on('scroll resize', function () {
 
 
 
-<script>$(document).ready(function(){
+<script>
+    $(document).ready(function(){
 
   function getQty(selector){
     return Number($(selector).find('input').val()) || 0;
@@ -4036,6 +4037,8 @@ $(window).on('scroll resize', function () {
     let items1 = $('.custom_checkout_button').data('items1') || [];
     let items2 = $('.custom_checkout_button').data('items2') || [];
 
+  alert('items1: ' + JSON.stringify(items1));
+  alert('items2: ' + JSON.stringify(items2));
     items1.forEach(i => {
       items.push({
         id: i.id,
