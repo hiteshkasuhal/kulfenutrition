@@ -3877,7 +3877,7 @@ $(window).on('scroll resize', function () {
   /* ===============================
      PACK BREAKDOWN LOGIC
   =============================== */
-  function getVariantBreakdown(productVariants, qty){
+  function getVariantBreakdown(productVariants, qty, forceSplitToSingles = false){
 
     if(qty == 0) return [];
 
@@ -3897,6 +3897,17 @@ $(window).on('scroll resize', function () {
     } else if(remainder == 1){
       count1 += 1;
     }
+
+     /* ===============================
+     🔥 SPECIAL CASE OVERRIDE
+     qty = 2 → force 1 + 1
+  =============================== */
+  if(forceSplitToSingles && qty == 2){
+    count3 = 0;
+    count2 = 0;
+    count1 = 2;
+  }
+
 
     if(count3 > 0 && productVariants[2] && productVariants[2].available){
       items.push({
@@ -3929,8 +3940,10 @@ $(window).on('scroll resize', function () {
 
     let q1 = getQty('.product1_quantity');
     let q2 = getQty('.product2_quantity');
+/* detect special case */
+let isBothTwo = (q1 == 2 && q2 == 2);
     let items1 = getVariantBreakdown(product1Variants, q1);
-    let items2 = getVariantBreakdown(product2Variants, q2);
+    let items2 = getVariantBreakdown(product2Variants, q2, isBothTwo);
 
     $('.custom_checkout_button')
       .data('items1', items1)
