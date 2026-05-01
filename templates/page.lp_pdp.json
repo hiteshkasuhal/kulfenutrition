@@ -880,7 +880,7 @@
       }
     },
     "product_lp_eL6de3": {
-      "type": "product_lp_bogo",
+      "type": "product_lp",
       "blocks": {
         "product2_EaQEjq": {
           "type": "product2",
