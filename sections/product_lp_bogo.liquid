@@ -3608,7 +3608,7 @@ $('.product1_quantity input').val(quantity);
 $('.product2_quantity input').val('0');
 var quantity = 0;
 $('.customize_item_quantity input').each(function(){
-var quantity = quantity + $(this).val();
+ quantity = quantity + parseInt($(this).val());
 });
 alert(quantity);
 
