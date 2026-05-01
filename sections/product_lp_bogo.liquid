@@ -3938,44 +3938,7 @@ function updateButtons(){
   }
 $('.product_switch.active .price_trigger').hide().removeClass('active');
 $('.product_switch.active .price_trigger[data_tab="'+total+'"]').show().addClass('active');
-
-    /* PRODUCT SWITCH LOGIC */
-
-    let activeProductId = null;
-
-    if(q1 > 0 && q2 == 0){
-      activeProductId = product1Id;
     }
-    else if(q2 > 0 && q1 == 0){
-      activeProductId = product2Id;
-    }
-    else if(q1 > 0 && q2 > 0){
-      // if both selected choose last changed or priority
-      activeProductId = product1Id;
-    }
-    if(activeProductId){
-var totalqty = q1 + q2;
-var index_price = totalqty -1;
-      $('.custom_checkout_button_landing_page .product_switch')
-        .removeClass('active')
-        .hide();
-
-      $('.product_switch[data_tab="'+activeProductId+'"]')
-        .addClass('active')
-        .show();
-    }
-
-    /* PRICE SWITCH */
-
-    $('.product_switch.active .price_trigger')
-      .hide()
-      .removeClass('active');
-      $('.product_switch.active').each(function(){
-    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
-});
-      $('.product_switch.active .subscription_trigger').each(function(){
-    $(this).find('.price_trigger').eq(index_price).show().addClass('active');
-});
   }
 
   updateVariants();
