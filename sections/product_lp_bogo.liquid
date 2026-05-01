@@ -3936,7 +3936,8 @@ function updateButtons(){
    } else {
     $('.option_item').eq(total-1).addClass('active');
   }
-
+$('.product_switch.active .price_trigger').hide().removeClass('active');
+$('.product_switch.active .price_trigger[data_tab="'+total+'"]').show().addClass('active');
 
     /* PRODUCT SWITCH LOGIC */
 
