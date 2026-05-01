@@ -3624,15 +3624,6 @@ $(this).addClass('active');
 var selected_variant_text = $('.option_item.active .variant_title').eq(0).attr('title');
 $('.product_label_lp_variant p strong').text(selected_variant_text);
 
-var product_loop = $('.swicth_item.active').index();
-if(product_loop == 0){
-var variant_id = $(this).attr('variant_id');
-var selling_plan = $(this).attr('selling_plan');
-}
-if(product_loop == 1){
-var variant_id = $(this).attr('variant_id2');
-var selling_plan = $(this).attr('selling_plan2');
-}
 
 var quantity = $('.option_item.active').index();
 quantity = quantity + 1;
@@ -3643,8 +3634,22 @@ $('.customize_item_quantity input').each(function(){
  quantity = quantity + parseInt($(this).val());
 });
 
-$('span.custom_checkout_button').attr('variant_id',variant_id);
+
+var product_loop = $('.swicth_item.active').index();
+if(product_loop == 0){
+var variant_id = $(this).attr('variant_id');
+var selling_plan = $(this).attr('selling_plan');
+}
+if(product_loop == 1){
+var variant_id = $(this).attr('variant_id2');
+var selling_plan = $(this).attr('selling_plan2');
+}
+if (quantity > 3){
 $('span.custom_checkout_button').attr('quantity',quantity);
+} else {
+$('span.custom_checkout_button').attr('quantity',1);
+$('span.custom_checkout_button').attr('variant_id',variant_id);
+}
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
 $('.product_switch.active .price_trigger[data_tab="'+quantity+'"]').show().addClass('active');
