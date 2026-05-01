@@ -3923,7 +3923,7 @@ function updateButtons(){
   let total = q1 + q2;
 
   if(total >= 3){
-    $('.customize_item_plus').attr('disabled', true);
+    $('.customize_item_plus').removeAttr('disabled');
   }else{
     $('.customize_item_plus').removeAttr('disabled');
   }
