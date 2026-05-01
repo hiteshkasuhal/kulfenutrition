@@ -840,31 +840,14 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
               <span class="product_switch active" data_tab="{{ product.id }}">
 
      <span class="subscription_trigger" data_tab="1">
-             {%- for variant in product.variants -%}
-             <span class="product_price_custom price_trigger{% if variant.id == product.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product.variants[0].id %} style="display:none;"{% endif %}>
-            {% assign price = variant.price  %}
-            {% assign compare_price = variant.price %}
-    {% if variant.compare_at_price > variant.price %}
-            {% assign compare_price = variant.compare_at_price %}
+             {%- for i in (1..30) -%}
+             <span class="product_price_custom price_trigger{% if forloop.index == 1 %} active{% endif %} one_time{% if product.variants[0].available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ product.variants[0].id }}"{% if forloop.index != 1 %} style="display:none;"{% endif %}>
+            {% assign price = product.variants[0].price  %}
+            {% assign compare_price = product.variants[0].price %}
+    {% if product.variants[0].compare_at_price > product.variants[0].price %}
+            {% assign compare_price = product.variants[0].compare_at_price %}
       {% endif %}
-             {% if variant.available %}{{ atc_text }} {{price | money }}
-             {% if compare_price > price %}<s>{{ compare_price | money }}</s>{% endif %}{% else %}Sold Out{% endif %}
-              </span>
-   {% endfor %}  
-             </span>
-     <span class="subscription_trigger" data_tab="2" style="display:none;">
-             {%- for variant in product.variants -%}
-             <span class="product_price_custom price_trigger{% if variant.id == produc.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product.variants[0].id %} style="display:none;"{% endif %}>
-              {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
-            {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
-              {% else %}
-            {% assign price = variant.price %}
-              {% endif %}
-            {% assign compare_price = variant.price %}
-    {% if variant.compare_at_price > variant.price %}
-            {% assign compare_price = variant.compare_at_price %}
-      {% endif %}
-             {% if variant.available %}{{ atc_text }} {{price | money }}
+             {% if product.variants[0].available %}{{ atc_text }} {{price | money }}
              {% if compare_price > price %}<s>{{ compare_price | money }}</s>{% endif %}{% else %}Sold Out{% endif %}
               </span>
    {% endfor %}  
@@ -881,30 +864,13 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 
      <span class="subscription_trigger" data_tab="1">
              {%- for variant in product2.variants -%}
-             <span class="product_price_custom price_trigger{% if variant.id == product2.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product2.variants[0].id %} style="display:none;"{% endif %}>
-            {% assign price = variant.price  %}
-            {% assign compare_price = variant.price %}
-    {% if variant.compare_at_price > variant.price %}
-            {% assign compare_price = variant.compare_at_price %}
+             <span class="product_price_custom price_trigger{% if forloop.index == 1 %} active{% endif %} one_time{% if product2.variants[0].available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ product2.variants[0].id }}"{% if forloop.index != 1 %} style="display:none;"{% endif %}>
+            {% assign price = product2.variants[0].price  %}
+            {% assign compare_price = product2.variants[0].price %}
+    {% if product2.variants[0].compare_at_price > product2.variants[0].price %}
+            {% assign compare_price = product2.variants[0].compare_at_price %}
       {% endif %}
-             {% if variant.available %}{{ atc_text }} {{price | money }}
-             {% if compare_price > price %}<s>{{ compare_price | money }}</s>{% endif %}{% else %}Sold Out{% endif %}
-              </span>
-   {% endfor %}  
-             </span>
-     <span class="subscription_trigger" data_tab="2" style="display:none;">
-             {%- for variant in product2.variants -%}
-             <span class="product_price_custom price_trigger{% if variant.id == product2.variants[0].id %} active{% endif %} one_time{% if variant.available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ variant.id }}"{% if variant.id != product2.variants[0].id %} style="display:none;"{% endif %}>
-             {% if variant.selling_plan_allocations.first.selling_plan.id != blank %}
-            {% assign price = variant.selling_plan_allocations.first.per_delivery_price  %}
-              {% else %}
-            {% assign price = variant.price %}
-              {% endif %}
-            {% assign compare_price = variant.price %}
-    {% if variant.compare_at_price > variant.price %}
-            {% assign compare_price = variant.compare_at_price %}
-      {% endif %}
-             {% if variant.available %}{{ atc_text }} {{price | money }}
+             {% if product2.variants[0].available %}{{ atc_text }} {{price | money }}
              {% if compare_price > price %}<s>{{ compare_price | money }}</s>{% endif %}{% else %}Sold Out{% endif %}
               </span>
    {% endfor %}  
@@ -3639,8 +3605,11 @@ if(product_loop == 1){
 var variant_id = $(this).attr('variant_id2');
 var selling_plan = $(this).attr('selling_plan2');
 }
-var quantity = $('.option_item.active').index();
-quantity = quantity + 1;
+var quantity = 0;
+$('.customize_item_quantity input').each(function(){
+var quantity = quantity + $(this).val();
+
+});
 $('.product1_quantity input').val(quantity);
 $('.product2_quantity input').val('0');
 
@@ -3648,7 +3617,7 @@ $('span.custom_checkout_button').attr('variant_id',variant_id);
 $('span.custom_checkout_button').attr('selling_plan',selling_plan);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
-$('.product_switch.active .price_trigger[data_tab="'+variant_id+'"]').show().addClass('active');
+$('.product_switch.active .price_trigger[data_tab="'+quantity+'"]').show().addClass('active');
 });
 
 
