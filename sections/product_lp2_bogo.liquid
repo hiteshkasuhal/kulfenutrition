@@ -1061,14 +1061,14 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   
   {% if forloop.index == 1 %}
     
-<span class="product_switch active" data_tab="{{ product.id }}">
+<span class="product_switch " data_tab="{{ product.id }}" style="display:none;">
 {% if block.settings.image1 != blank %}
 <img src="{{ block.settings.image1 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image1.alt }}">
 {% else %}
 <img src="{{variant.featured_image | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ variant.title }}">
   {% endif %}
 </span>
-<span class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<span class="product_switch active" data_tab="{{ product2.id }}">
 {% if block.settings.image1_2 != blank %}
 <img src="{{ block.settings.image1_2 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image1_2.alt }}">
 {% else %}
@@ -1081,7 +1081,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   {% endif %}
   {% if forloop.index == 2 %}
     
-<span class="product_switch active" data_tab="{{ product.id }}">
+<span class="product_switch active" data_tab="{{ product.id }}" style="display:none;">
 {% if block.settings.image2 != blank %}
 <img src="{{ block.settings.image2 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image2.alt }}">
 {% else %}
@@ -1089,14 +1089,14 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   {% endif %}
 </span>
 
-<span class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<span class="product_switch active" data_tab="{{ product2.id }}">
 {% if block.settings.image2_2 != blank %}
 <img src="{{ block.settings.image2_2 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image2_2.alt }}">
 {% else %}
 <img src="{{product2.variants[variant_loop].featured_image | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ variant.title }}">
   {% endif %}
 </span>
-  {% if block.settings.badge2 != blank %}<div class="product_switch active" data_tab="{{ product.id }}">
+  {% if block.settings.badge2 != blank %}<div class="product_switch " data_tab="{{ product.id }}" style="display:none;">
   <div class="subscription_trigger" data_tab="1">
     {% assign save = variant.compare_at_price | minus: variant.price | money_without_trailing_zeros  %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
@@ -1110,7 +1110,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
   </div>
   </div>
-<div class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<div class="product_switch active" data_tab="{{ product2.id }}"=>
   <div class="subscription_trigger" data_tab="1">
     {% assign save = variant.compare_at_price | minus: product2.variants[variant_loop].price | money_without_trailing_zeros %}
     <div class="variant_badge">{{ block.settings.badge2 | replace:'[save]',save }}</div>
@@ -1129,7 +1129,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   {% endif %}
   {% if forloop.index == 3 %}
     
-<span class="product_switch active" data_tab="{{ product.id }}">
+<span class="product_switch " data_tab="{{ product.id }}" style="display:none;">
 {% if block.settings.image3 != blank %}
 <img src="{{ block.settings.image3 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image3.alt }}">
 {% else %}
@@ -1137,7 +1137,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
   {% endif %}
 </span>
   
-<span class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<span class="product_switch active" data_tab="{{ product2.id }}">
 {% if block.settings.image3_2 != blank %}
 <img src="{{ block.settings.image3_2 | image_url }}"width="auto" height="auto" fetchpriority="high" loading="eager" alt="{{ block.settings.image3_2.alt }}">
 {% else %}
@@ -1146,7 +1146,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 </span>
   {% if block.settings.badge3 != blank %}
     
-<div class="product_switch active" data_tab="{{ product.id }}">
+<div class="product_switch" data_tab="{{ product.id }}" style="display:none;">
   <div class="subscription_trigger" data_tab="1">
     {% assign save = variant.compare_at_price | minus: variant.price | money_without_trailing_zeros  %}
     <div class="variant_badge">{{ block.settings.badge3 | replace:'[save]',save }}</div>
@@ -1160,7 +1160,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
   </div>
   </div>
-<div class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<div class="product_switch active" data_tab="{{ product2.id }}">
   <div class="subscription_trigger" data_tab="1">
     {% assign save = variant.compare_at_price | minus: product2.variants[variant_loop].price | money_without_trailing_zeros %}
     <div class="variant_badge">{{ block.settings.badge3| replace:'[save]',save }}</div>
@@ -1179,7 +1179,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 </div>
 <div class="option_item_flex_right">
   
-<div class="product_switch active" data_tab="{{ product.id }}">
+<div class="product_switch" data_tab="{{ product.id }}" style="display:none;">
   <div class="subscription_trigger" data_tab="1">
 <div class="option_item_price">
   {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{%endif %}
@@ -1194,7 +1194,7 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 </div>
   </div>
 </div>
-<div class="product_switch" data_tab="{{ product2.id }}" style="display:none;">
+<div class="product_switch active" data_tab="{{ product2.id }}">
   <div class="subscription_trigger" data_tab="1">
 <div class="option_item_price">
   {% if variant.compare_at_price > variant.price %}<s>{{ variant.compare_at_price | money }}</s>{%endif %}
