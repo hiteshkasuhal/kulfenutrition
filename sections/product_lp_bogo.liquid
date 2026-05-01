@@ -3877,14 +3877,27 @@ $(window).on('scroll resize', function () {
   /* ===============================
      PACK BREAKDOWN LOGIC
   =============================== */
-  function getVariantBreakdown(productVariants, qty){
+ function getFinalBreakdown(product1Variants, product2Variants, q1, q2){
 
-    if(qty == 0) return [];
+  let totalUnits = q1 + q2;
+  if(totalUnits === 0) return { items1: [], items2: [] };
+
+  // Step 1: B2G1
+  let freeUnits = Math.floor(totalUnits / 3);
+  let paidUnits = totalUnits - freeUnits;
+
+  // Step 2: PRIORITY → product1 first (your requirement behavior)
+  let paid1 = Math.min(q1, paidUnits);
+  let paid2 = paidUnits - paid1;
+
+  // Step 3: convert units → variants
+  function buildVariants(productVariants, units){
 
     let items = [];
+    if(units <= 0) return items;
 
-    let count3 = Math.floor(qty / 3);
-    let remainder = qty % 3;
+    let count3 = Math.floor(units / 3);
+    let remainder = units % 3;
 
     let count2 = 0;
     let count1 = 0;
@@ -3898,30 +3911,26 @@ $(window).on('scroll resize', function () {
       count1 += 1;
     }
 
-    if(count3 > 0 && productVariants[2] && productVariants[2].available){
-      items.push({
-        id: productVariants[2].id,
-        quantity: count3
-      });
+    if(count3 > 0 && productVariants[2]?.available){
+      items.push({ id: productVariants[2].id, quantity: count3 });
     }
 
-    if(count2 > 0 && productVariants[1] && productVariants[1].available){
-      items.push({
-        id: productVariants[1].id,
-        quantity: count2
-      });
+    if(count2 > 0 && productVariants[1]?.available){
+      items.push({ id: productVariants[1].id, quantity: count2 });
     }
 
-    if(count1 > 0 && productVariants[0] && productVariants[0].available){
-      items.push({
-        id: productVariants[0].id,
-        quantity: count1
-      });
+    if(count1 > 0 && productVariants[0]?.available){
+      items.push({ id: productVariants[0].id, quantity: count1 });
     }
 
     return items;
   }
 
+  return {
+    items1: buildVariants(product1Variants, paid1),
+    items2: buildVariants(product2Variants, paid2)
+  };
+}
   /* ===============================
      UPDATE VARIANTS (STORE ITEMS)
   =============================== */
@@ -3929,8 +3938,9 @@ $(window).on('scroll resize', function () {
 
     let q1 = getQty('.product1_quantity');
     let q2 = getQty('.product2_quantity');
-    let items1 = getVariantBreakdown(product1Variants, q1);
-    let items2 = getVariantBreakdown(product2Variants, q2);
+    let result = getFinalBreakdown(product1Variants, product2Variants, q1, q2);
+let items1 = result.items1;
+let items2 = result.items2;
 
     $('.custom_checkout_button')
       .data('items1', items1)
