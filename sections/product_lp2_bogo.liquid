@@ -2153,7 +2153,7 @@ var product2Id = {{ product_2.id | json }};
   
 {% schema %}
   {
-    "name": "Product LP Bogo",
+    "name": "Product LP Bogo2",
     "settings": [
      {
       "type": "product",
@@ -3403,7 +3403,7 @@ var product2Id = {{ product_2.id | json }};
   ],
   "presets": [
     {
-      "name": "Product LP Bogo"
+      "name": "Product LP Bogo2"
     }
   ]
   }
@@ -3629,8 +3629,8 @@ $('.product_label_lp_variant p strong').text(selected_variant_text);
 
 var quantity = $('.option_item.active').index();
 quantity = quantity + 1;
-$('.product1_quantity input').val(quantity);
-$('.product2_quantity input').val('0');
+$('.product1_quantity input').val('0');
+$('.product2_quantity input').val(quantity);
 var quantity = 0;
 $('.customize_item_quantity input').each(function(){
  quantity = quantity + parseInt($(this).val());
