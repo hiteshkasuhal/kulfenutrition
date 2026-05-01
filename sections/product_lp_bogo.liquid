@@ -3642,8 +3642,8 @@ var quantity = 0;
 $('.customize_item_quantity input').each(function(){
  quantity = quantity + parseInt($(this).val());
 });
-alert(quantity);
 
+$('span.custom_checkout_button').attr('variant_id',variant_id);
 $('span.custom_checkout_button').attr('quantity',quantity);
 
 $('.product_switch.active .price_trigger').hide().removeClass('active');
