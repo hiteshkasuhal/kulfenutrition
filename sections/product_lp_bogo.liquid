@@ -3931,7 +3931,11 @@ function updateButtons(){
   if(total > 0){
 
     $('.option_item').removeClass('active');
+  if(total > 3){
+    $('.option_item').eq(2).addClass('active');
+   } else {
     $('.option_item').eq(total-1).addClass('active');
+  }
 
 
     /* PRODUCT SWITCH LOGIC */
