@@ -839,22 +839,49 @@ style="background-color:{{ section.settings.bg_color | default:'transparent' }};
 
               <span class="product_switch active" data_tab="{{ product.id }}">
 
-             {%- for i in (1..30) -%}
-    {% assign quantity = i %}
-    {% assign group_of_three = quantity | divided_by: 3 %}
-    {% assign remainder = quantity | modulo: 3 %}
-    {% assign paid_quantity = group_of_three | times: 2 %}
-    {% assign paid_quantity = paid_quantity | plus: remainder %}
-             <span class="product_price_custom price_trigger{% if forloop.index == 1 %} active{% endif %} one_time{% if product.variants[0].available %}{% else %} sold_out_custom{% endif %}" data_tab="{{ i }}"{% if forloop.index != 1 %} style="display:none;"{% endif %}>
-            {% assign price = product.variants[0].price | times: paid_quantity  %}
-            {% assign compare_price = product.variants[0].price| times: paid_quantity %}
-    {% if product.variants[0].compare_at_price > product.variants[0].price %}
-            {% assign compare_price = product.variants[0].compare_at_price | times: paid_quantity %}
+        {%- for i in (1..30) -%}
+  {% assign quantity = i %}
+
+  <span class="product_price_custom price_trigger{% if forloop.index == 1 %} active{% endif %} one_time{% unless product.variants[0].available %} sold_out_custom{% endunless %}" 
+        data_tab="{{ i }}"
+        {% if forloop.index != 1 %} style="display:none;"{% endif %}>
+
+    {% if quantity <= 3 %}
+      
+      {% assign variant_index = quantity | minus: 1 %}
+      {% assign selected_variant = product.variants[variant_index] %}
+
+      {% assign price = selected_variant.price %}
+      {% assign compare_price = selected_variant.compare_at_price %}
+
+    {% else %}
+
+      {% assign group_of_three = quantity | divided_by: 3 %}
+      {% assign remainder = quantity | modulo: 3 %}
+
+      {% assign paid_quantity = group_of_three | times: 2 %}
+      {% assign paid_quantity = paid_quantity | plus: remainder %}
+
+      {% assign price = product.variants[0].price | times: paid_quantity %}
+
+      {% assign compare_price = product.variants[0].price | times: quantity %}
+      {% if product.variants[0].compare_at_price > product.variants[0].price %}
+        {% assign compare_price = product.variants[0].compare_at_price | times: quantity %}
       {% endif %}
-             {% if product.variants[0].available %}{{ atc_text }} {{price | money }}
-             {% if compare_price > price %}<s>{{ compare_price | money }}</s>{% endif %}{% else %}Sold Out{% endif %}
-              </span>
-   {% endfor %}  
+
+    {% endif %}
+
+    {% if product.variants[0].available %}
+      {{ atc_text }} {{ price | money }}
+      {% if compare_price > price %}
+        <s>{{ compare_price | money }}</s>
+      {% endif %}
+    {% else %}
+      Sold Out
+    {% endif %}
+
+  </span>
+{%- endfor -%}
              </span>
 
 
