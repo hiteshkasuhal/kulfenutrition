@@ -4061,8 +4061,29 @@ $(window).on('scroll resize', function () {
       data: { items: items },
       dataType: 'json',
       success: function(){
-        // open cart drawer or redirect
-        location.href = '/cart';
+        
+      $.get(window.location.pathname, function(res){
+
+        const $newCartCount = $(res).find('.cart_count_js');
+        const cartCount = parseInt($newCartCount.text().trim(), 10);
+
+        if(cartCount > 0){
+          $('.cart_count_js').text(cartCount).show();
+        }else{
+          $('.cart_count_js').text('').hide();
+        }
+
+        if(window.upcartRefreshCart){
+          window.upcartRefreshCart();
+        }
+
+        if(window.upcartOpenCart){
+          window.upcartOpenCart();
+        }
+
+        $btn.removeClass('loading_hk');
+
+      });
       },
       error: function(){
         alert('Error adding to cart');
